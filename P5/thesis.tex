@@ -1,0 +1,174 @@
+
+\documentclass[10pt,a4paper,twoside,openright,fleqn,%
+               headinclude,footinclude,parskip=half,%
+               numbers=noenddot,cleardoublepage=empty]{scrbook}
+
+\usepackage[utf8]{inputenc} 
+\usepackage{mathpazo} %-- use Palatino font
+\usepackage[left=25mm,top=25mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[square]{natbib}
+\usepackage{subcaption} 
+\usepackage{xspace}
+\usepackage{hyperref} 
+\usepackage[ruled,vlined,algochapter,linesnumbered]{algorithm2e}
+\usepackage{calc}
+\usepackage{ccicons} 
+\usepackage{xspace} 
+\usepackage{booktabs} 
+\usepackage[english]{babel}  
+\usepackage{listings}
+\usepackage{scrhack} % ignore warnings about deprecated KOMA-Script
+\usepackage[printonlyused,smaller,withpage]{acronym}
+\usepackage[usenames,dvipsnames, table]{xcolor}
+\usepackage{graphicx}
+\usepackage{pdfpages}
+\usepackage{lscape}
+\definecolor{lichtgrijs}{gray}{0.95}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{todonotes}
+
+% for quote blocks
+\usepackage[most]{tcolorbox}     
+\newtcolorbox{myquote}{colback=gray!20!white,colframe=gray!75!black,grow to right by=-10mm,grow to left by=-10mm,
+    boxrule=0pt,boxsep=0pt,breakable} \makeatletter
+\newcommand{\blockquote}[1]{  \begin{myquote}  #1  \end{myquote}  }
+
+%-- for JSON
+\usepackage{bera}% optional: just to have a nice mono-spaced font
+\usepackage{listings}
+\lstdefinestyle{base}{
+  language=C,
+  moredelim=**[is][\color{red}]{@}{@},
+}
+
+\colorlet{punct}{red!60!black}
+\definecolor{background}{HTML}{EEEEEE}
+\definecolor{delim}{RGB}{20,105,176}
+\colorlet{numb}{magenta!60!black}
+
+% JSON block layout
+\lstdefinelanguage{json}{
+    basicstyle=\normalfont\ttfamily,
+    numbers=left,
+    numberstyle=\scriptsize,
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    frame=lines,
+    backgroundcolor=\color{white},
+    literate=
+     *{0}{{{\color{numb}0}}}{1}
+      {1}{{{\color{numb}1}}}{1}
+      {2}{{{\color{numb}2}}}{1}
+      {3}{{{\color{numb}3}}}{1}
+      {4}{{{\color{numb}4}}}{1}
+      {5}{{{\color{numb}5}}}{1}
+      {6}{{{\color{numb}6}}}{1}
+      {7}{{{\color{numb}7}}}{1}
+      {8}{{{\color{numb}8}}}{1}
+      {9}{{{\color{numb}9}}}{1}
+      {:}{{{\color{punct}{:}}}}{1}
+      {,}{{{\color{punct}{,}}}}{1}
+      {\{}{{{\color{delim}{\{}}}}{1}
+      {\}}{{{\color{delim}{\}}}}}{1}
+      {[}{{{\color{delim}{[}}}}{1}
+      {]}{{{\color{delim}{]}}}}{1},
+      morestring=[b]"
+}
+
+
+\input{mysettings}
+
+\setcapindent{1em} %-- for captions of Figures
+% \setcounter{tocdepth}{\sectiontocdepth}
+
+\subject{MSc thesis in Geomatics}
+\title{\myTitle}
+\author{\myName}
+\date{\myGraduationMonth\xspace\myGraduationYear}
+\publishers{A thesis submitted to the Delft University of Technology in partial fulfillment of the requirements for the degree of Master of Science in Geomatics}
+
+\begin{document}
+
+
+%******************************************************************
+% Frontmatter
+%******************************************************************
+\frontmatter
+
+%******************************************************************
+% The cover page 
+% (it needs to be manually edited and exported as a PDF)
+% (see folder README.txt in folder 'cover')
+% (I would not include it for the version you put in the repository)
+%******************************************************************
+
+\includepdf{cover/cover_front.pdf}
+\cleardoublepage
+
+\maketitle[3]
+
+% \clearpage
+\input{front/titleback}
+\cleardoublepage
+\include{front/abstract}
+%\include{front/acknow}
+\clearpage
+\include{front/contents}
+\clearpage
+\include{front/acronyms}
+\cleardoublepage
+
+%******************************************************************
+% Mainmatter
+%******************************************************************
+\mainmatter
+
+\include{chapters/introduction}
+\include{chapters/theory}
+\include{chapters/relatedwork}
+\include{chapters/methodology}
+\include{chapters/implementation}
+\include{chapters/bmresults}
+%\include{chapters/qualitative}
+\include{chapters/conclusion}
+\include{chapters/streaming}
+
+\appendix
+
+%%%
+\cleardoublepage
+\include{appendices/datasets}
+%-- other examples of Appendix, not mandatory
+\include{appendices/tools}
+%-- *mandatory* appendix about the reproducibility
+\include{appendices/reproducibility}
+\include{appendices/rawresults}
+
+% *****************************************************************
+% Backmatter
+%******************************************************************
+\backmatter 
+
+%- bibliography
+\bibliographystyle{abbrvnat}
+\bibliography{myreferences}
+
+
+
+\clearpage
+\include{back/colophon}
+\cleardoublepage
+
+
+\includepdf{cover/cover_back.pdf}
+
+\end{document}
+
+
+
+
+

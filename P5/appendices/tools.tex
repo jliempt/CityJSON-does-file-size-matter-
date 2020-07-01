@@ -1,0 +1,50 @@
+
+
+\chapter{List of used tools}
+\label{ch:tools}
+
+\section{Shapely}
+\label{tools:shapely}
+Shapely \citep{Shapely2020} is a Python library used for the analysis and manipulation of planar features.
+I use it to perform buffer operations in the client.
+
+\section{cjio}
+\label{tools:cjio}
+Standing for CityJSON/io, \citep{cjio} is a Python\ac{cli} for processing and manipulating CityJSON datasets.
+
+\section{Flask}
+\label{tools:flask}
+Flask \citep{Flask2020} is a lightweight Python web framework with which web applications can be built. 
+It allows harp.gl to work together with cjio, as Flask acts as a server and enables the preparation of web pages.
+%socketio
+
+\section{three.js}
+\label{tools:threejs}
+A JavaScript library for the visualisation of 3D graphics in the browser, utilising the lower level \ac{webgl} \citep{Three.js2020}.
+It is used in this thesis to visualise CityJSON datasets.
+
+\section{harp.gl}
+\label{tools:harpgl}
+An open source 3D web map rendering engine for JavaScript \citep{harpgl}.
+It utilises \ac{webgl} and three.js.
+Used for the visualisation of CityJSON datsets.
+
+\section{Turf.js}
+\label{tools:turfjs}
+It is a library written in JavaScript for geospatial analysis \citep{Turf.js2020}.
+I have used it to buffer geometries in the client.
+
+\section{Proj4js}
+\label{tools:proj4js}
+Proj4js \citep{Proj4js2020} is a JavaScript library that enables the transformation of coordinates to other \ac{crs}s.
+
+\section{Selenium}
+\label{tools:selenium}
+Selenium \citep{Muthukadan2020} can drive web browsers in an automated way.
+It has Python bindings and I have used it for the benchmarking part of the thesis.
+
+\section{Draco}
+\label{tools:draco}
+An open-source library by Google \citep{dracoperformance} that is used to compess and decompress 3D geometric meshes for the purpose of improved storage and transmission efficiency.
+It has functionalities in C++, JavaScript, and WebAssembly.
+Used for the compression of geometries of CityJSON datasets.

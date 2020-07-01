@@ -1,0 +1,151 @@
+{% extends "layout.html" %}
+
+
+{% block head %}
+
+<meta charset='utf-8' />
+<title>harp.gl visualisation</title>
+
+<script type="text/javascript" src="{{ url_for('static', filename='etc/socket.io.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='etc/three.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='etc/harp.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='etc/harp-decoders.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='cityjson.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='cjio.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='harpgl_cityjson.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='harpgl_draco.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='etc/functions.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='etc/jquery.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='etc/earcut.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='etc/proj4.js') }}"></script>
+
+{% if false %}
+var filename = {{ filename|tojson }};
+{% endif %}
+
+
+<style>
+    body, html { border: 0; margin: 0; padding: 0}
+    #map { height: 100vh; width: 100vw; }
+ </style>
+
+{% endblock %}
+
+
+<!-- Initialise variables from Flask with Jinja-->
+{% block body %}
+
+<canvas id="map"></canvas>
+
+<script>
+// Retrieve variables from Flask if they exist
+{% if filename is defined %}
+var filename = {{ filename|tojson }};
+{% endif %}
+{% if method is defined %}
+var method = {{ method|tojson }};
+{% endif %}
+{% if task is defined %}
+var task = {{ task|tojson }};
+{% endif %}
+{% if field is defined %}
+var field = {{ field|tojson }};
+{% endif %}
+{% if value is defined %}
+var value = {{ value|tojson }};
+{% endif %}
+{% if operation is defined %}
+var operation = {{ operation|tojson }};
+{% endif %}
+{% if cm is defined %}
+cm = {{ cm|tojson }};
+{% endif %}
+{% if start is defined %}
+var start = {{ start|tojson }};
+{% endif %}
+</script>
+
+
+{% block javascript %}
+
+{% if method == "originalcbor" or method == "originalcborreplace" or method == "originalcborreplacehuff" or method == "originalcborreplacezlib" or method == "originalcborzlib" or method == "originalcborsmaz" or method == "dracocbor" or method == "dracocborzlib" or method == "dracoreplace" or method == "dracocborreplace" or method == "dracocborreplacezlib" %}
+<script type="text/javascript" src="{{ url_for('static', filename='etc/cbor.js') }}"></script>
+{% endif %}
+
+{% if method == "originalcborreplacehuff" %}
+<script type="text/javascript" src="{{ url_for('static', filename='etc/huffman-0.9.0.min.js') }}"></script>
+{% endif %}
+
+{% if method == "originalcborsmaz" %}
+<script type="text/javascript" src="{{ url_for('static', filename='etc/smaz.js') }}"></script>
+{% endif %}
+
+{% if method == "originalcborreplacezlib" or method == "originalcborzlib" or method == "originalzlib" or method == "dracocborzlib" or method == "dracocborreplacezlib" or method == "dracozlib" %}
+<script type="text/javascript" src="{{ url_for('static', filename='etc/pako.min.js') }}"></script>
+{% endif %}
+
+{% if method == "draco" or method == "dracoreplace" or method == "dracocbor" or method == "dracocborzlib" or method == "dracocborreplace" or method == "dracozlib" or method == "dracocborreplacezlib" %}
+
+    <script type="text/javascript" src="{{ url_for('static', filename='etc/draco_decoder.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='harpgl_draco.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='DRACOLoader.js') }}"></script>
+
+{% endif %}
+
+{% endblock %}
+
+<script type="text/javascript"
+src="{{ url_for('static', filename='flask_landing.js') }}"></script>
+
+
+<script>
+
+handleMethod();
+
+async function handleMethod(){
+    // Start viewer
+    initViewer();
+
+    // JSON files
+     if(method == "original" || method == "originalreplace" || method == "dracoreplace"){
+        initViewer();
+
+        var requesturl = "http://127.0.0.1:5000/download/" + filename + "/" + method + "/" + task;
+        let response = await fetch(requesturl)
+        
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            cm = data;
+            processData(cm);
+        })
+    }
+
+    // Binary files need to be downloaded as ArrayBuffer
+    else if(method == "draco" || method == "dracocbor" || method == "dracocborzlib" || method == "dracocborreplace" || method == "originalcborreplace" || method == "originalcbor" || method == "originalcborreplacehuff" || method == "originalcborsmaz"
+            || method == "originalcborreplacezlib" || method == "dracocborreplacezlib" || method == "originalcborzlib" || method == "originalzlib" || method == "dracozlib" || method == "originalreplacezlib" || method == "originalreplacezlib"){
+        
+        initViewer();
+        var requesturl = "http://127.0.0.1:5000/download/" + filename + "/" + method + "/" + task;
+        var oReq = new XMLHttpRequest();
+        oReq.open("GET", requesturl, true);
+        if (method != "draco"){
+            oReq.responseType = "arraybuffer";
+        }
+        oReq.onload = function (oEvent) {
+        var data = oReq.response;
+
+        processData(data);
+        };
+
+        oReq.send(null);
+    }
+}
+</script>
+
+
+
+<canvas id="markerelement"></canvas>
+
+{% endblock %}

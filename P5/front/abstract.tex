@@ -1,0 +1,30 @@
+
+\chapter*{Abstract}
+
+The possibilities of 3D city models for the analysis of the built environment are increasingly explored, and there is a continuous development in improvements on their inner workings.
+They are also used more often on the web, for example for visualisation but it is also possible to query, analyse, and edit data in this way.
+In this case, the network becomes a potential new bottleneck in time performance.
+Especially when a 3D city model contains a lot of attributes, there is a rapid increase in file size when the area of study is expanded.
+This presents challenges in efficiency and in this thesis I focus on the improvement of the inner workings of 3D city models to attempt to relieve this problem, in specific for spreading and using them more efficiently on the web.
+
+By investigating and testing different compression techniques on 3D city models stored in the CityJSON format, I have attempted to relieve this problem.
+CityJSON is already more compact than CityGML and these techniques decrease the file sizes of datasets even further, allowing for faster transmission over a network. 
+But on the other hand, additional steps are needed to process compressed files.
+The goal of using a compression technique is to result in a net speed gain, meaning that the time that is saved on download time should be larger than the additional time that it costs to process the file before transmission (compressing the data on the server) and after receival (decompressing the data in the client).
+
+There are compression techniques for both general and specific purposes, and I have used combinations of them.
+Amongst these are Draco compression, zlib, CBOR, and a self-created technique.
+Specific ones are used for the main characteristics that CityJSON datasets have, which are the JSON structure, feature attributes, and feature geometries.
+To assess the impact that different combinations of compression techniques have, I take uncompressed CityJSON performance as the baseline and have come up with different performance indicators that include several use cases such as visualisation, querying, analysis, and editing.
+
+I have benchmarked all combinations of compression techniques on the use cases of these performance indicators.
+For this I have created two types of server implementations: one with which datasets are compressed beforehand and are processed in the client based on the request made by the user, and one where the data is processed first and only then compressed and transmitted to the server.
+In the results, you can see the best-performing compression type per use case.
+
+The benchmarking is performed on a variety of datasets that are split into four categories: larger datasets, larger datasets without attributes, smaller datasets, and smaller datasets without attributes.
+This ultimately makes for use cases that are very specific and choosing suitable compression types requires finding out which ones perform relatively well in most cases, and are not difficult to implement in order to keep CityJSON a simple file format.
+It turns out that Draco compression can give good results in specifc situations, but in general is not good to use.
+Not only regarding performance, but also from a developer point of view.
+CBOR, zlib, and a combination of these two are easy to use and generally affect the performance of CityJSON on the web in a good way.
+
+% add conclusion

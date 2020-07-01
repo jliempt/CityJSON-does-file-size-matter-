@@ -1,0 +1,169 @@
+%!TEX root = thesis.tex
+\chapter{Conclusion}
+\label{ch:conclusion}
+
+\section{Performed work and summary of achieved results}
+
+In the end I have tested 16 CityJSON datasets, represented in 14 different ways, on 9 operations in two different ways: with the datasets prepared in advance, and with them being compressed on the fly.
+This makes for 4032 benchmarks that have been condensed into 18 boxplot charts in Chapter~\ref{ch:bmresults}, accompanied by additional benchmarks on (de)compression time and file size that help explaining the results.
+For every use case, the best-performing compression type has been found.
+I have also created two overview graphs for the two server implementations, which indicate what compression types have a good all-round performance compared to original CityJSON.
+
+In some cases, I have achieved results of as good as 9\% of the time that it would to take the same operation with uncompressed CityJSON---when buffering the city objects of all larger datasets (that include attributes), with a file that is compressed beforehand with the draco-cbor-zlib type.
+This is however a very specific use case, and there are also cases in which compression is not worth it.
+For example, when querying one city object and compressing it on the fly.
+
+The research question of the thesis is as follows:
+
+\textit{To what extent can the implementation of different compression techniques improve CityJSON’s performance on the web, considering file size, visualisation, querying, spatial analysis, and editing performance?}
+
+You could theoretically answer the question by stating the numbers of the best benchmarking results for every use case.
+I however think it does not make sense to state specific numbers to answer this question as I believe it does not matter for the actually useful conclusions of this thesis.
+The use cases are too specific and it is not a good idea to implement multiple compression types for specific cases only.
+It turned out to be more important what would be compression types that are worth implementing in general.
+
+
+It is hard to pick the best general compression types based on performance alone, as there are none that outperform others in every case.
+But in addition to that, the performance itself is not the only important aspect of a compression type, since it also needs to be easily implementable by developers.
+CityJSON is an easy to use format and it should remain that way, as further discussed in Section~\ref{concl:cj}.
+For these reasons, I think \ac{cbor}, zlib, or a combination of these two is the best to use.
+They are two compression techniques that are widely implemented and proved to perform well on average, regardless of the two types of server implementations and there is also not a large difference to be seen with them between different dataset types.
+
+
+
+
+
+Draco compression only showed good results when compressing the data in advance and using it on larger datasets.
+For smaller datasets it adds too much overhead in (de)coding time, and for compressing it on the fly it the compression time is too long.
+In addition to that, it proved hard to use as a developer.
+The C++ library has to be built beforehand, and the compression algorithms in Python have to call the command line to compress an OBJ file to a specified path.
+That also means that CityJSON geometries have to be converted to OBJ before this can be done, making the compression inefficient.
+
+Using the JavaScript decoder, by default the Draco \ac{blob} is decoded into one big mesh, as opposed to individual meshes for every city object.
+This is unwanted, since in a 3D city model you want to be able to distinguish between features.
+I had to dive deep into the code myself to enable this distinguishment, and even then it does not work properly (see Section~\ref{sec:dracoimplementation}).
+To me it seems that Draco is very useful for visualisation only applications, but not when you want to do spatial analysis or be able to show the attributes of individual features---so not for \ac{gis} applications.
+The latter part can change when this is actually implemented into the JavaScript decoder, and analysis can become easier if it would be possible to directly compress CityJSON geometries into Draco and back, which I think will not happen.
+
+The replace method proved to not be very efficient.
+I believe this is due to all city objects having to be traversed for both compression and decompression (see Section~\ref{sec:implreplace}).
+I had made up this technique myself, and the results do not indicate that it is worth it to further investigate.
+It is also not very easy to implement because of the need of recursive functions to be able to use it.
+
+Again, \ac{cbor} and zlib do prove to be useful compression techniques for CityJSON, and can also be combined.
+But it would also be possible to use other binary \ac{json} formats than \ac{cbor} (such as \ac{bson}, MessagePack, or \ac{ubjson}) and other general purpose techniques than zlib.
+I think this can be investigated a bit further before any kind of compression would actually be implemented for CityJSON.
+
+
+
+
+
+
+
+
+\section{CityJSON on the web and compression}
+\label{concl:cj}
+
+I believe that it is best to use \ac{i3s} or \ac{b3dm} on the web when high visualisation performance is required.
+This is because of them being created with this specific purpose in mind.
+They already have tiling implemented.
+The large advantage that CityJSON has over these two is its ease of use.
+Therefore, I think this advantage should be preserved as much as possible and \ac{i3s} and \ac{b3dm} can be seen as complementary file formats rather than competitors.
+
+CityJSON facilitates the creation of 3D models in a user-friendly way.
+This is (at least currently) easier than creating \ac{i3s} and \ac{b3dm} from scratch, since for instance cjio and 3dfier can be utilised to do create CityJSON datasets.
+CityJSON datasets can be inspected easily and the structure is more straightforward.
+Doing analysis with them is easier as well because of its simpler structure and geometries can be accessed and read easily, as opposed to having to work with the---often binary---\ac{gltf}.
+
+\ac{i3s} and \ac{b3dm} lack an extensive data model and need to be converted from other file types, which would then also have to be created first.
+This could be done from CityJSON as well when converters for it are written.
+
+What I thus see as the ideal 3D model workflow is creating CityJSON datasets at first.
+It can be used to easily inspect the data, check its quality, and do analysis if wanted.
+Then if one is to publish the data for viewing on the web, it could be converted to one of the other formats.
+% Versioning -> only converting parts that had been changed
+
+That is if high performance is needed.
+CityJSON can be visualised on the web as well in a relatively simple manner as well, through converting the geometries to a three.js mesh.
+It definitely can be useful for web visualisation as well, let alone other web use such as dissemination.
+
+CityJSON can thus perfectly exist together with \ac{i3s} and \ac{b3dm} as it has its own advantages.
+The focus should be kept on keeping it easy to use for regular users.
+Compression can make this more complicated, at least for developers, as there are extra steps to be taken to read or store a dataset.
+However, the use of massive datasets on the web can still be troublesome, which data compression could relieve.
+I therefore think that it is still feasible to implement compression functionalities for it, but with the strict requirement that it needs to be easy to use.
+
+For me, the inclusion of Draco compression is out of the question.
+According to my experience it is not easy to work with, at least not when using it in liaison with 3D city models.
+This is because Draco by default compresses all objects of an OBJ into one big object.
+It is possible to keep the separation between objects, but the JavaScript decoder is not able to handle this well out of the box and it will result in a less good compression.
+To make it somewhat work, I had to dive into the source code and make alterations which was time consuming.
+In addition to that, offline users would have to compile the Draco library on their computer in order to be able to read and write datasets that include Draco geometries, which is troublesome as well.
+Draco is hard to use with any operation and it is not suitable for compression on the fly because of its long encoding time.
+
+
+It is however a good idea to include the possibility for parsing to data to and from \ac{cbor}.
+To use it only a lightweight library is required, and it already exists for most languages.
+Only one simple line of code is necessary to encode or decode it from and to \ac{json}.
+While not compressing the data size as far as other compression method combinations, it still always results in a smaller file size. 
+On top of that, the results show good performance for it, both when compressing it in advance and on the fly.
+Zlib is also suitable to use, and a combination of \ac{cbor} and zlib is a nice possibility as well.
+
+
+
+
+
+%\section{CityJSON + other efficient web use}
+%\begin{itemize}
+%\item It is also possible to use 3DCityDB to serve data on the web instead of Flask.
+%\item Streaming CityJSON and OGC API.
+%\item Should tiling be implemented into CityJSON? I think not, for reasons that I mentioned in the previous section. It is better to invest in good conversion to B3DM and/or I3S.
+
+%\end{itemize}
+
+
+
+\section{Limitations}
+\label{sec:limitations}
+
+There are many variables in the benchmarking that have influenced the results.
+
+The choice of datasets could be improved, as I picked ones that were easy to find.
+It also seemed that the smaller datasets were more error prone in testing as the benchmarked times were smaller.
+This might have been the cause in results seeming unexplainable.
+The plan was to analyse the differences in performances between the selected datasets.
+This however made it too complex as there was too much data and too many differing results to explain.
+Some of them made few sense, so I had decided to average them into the two groups of smaller and larger datasets.
+
+In addition to that, I had removed the attributes of the datasets and did separate tests with those.
+But there are actually many more variable characteristics of datasets that can influence the results.
+Not only file size and the presence of attributes, but also the amount and type of attributes, their length, language, the inclusion of metadata, textures, semantics, \ac{lod}s, and so on.
+Testing all of these takes a lot of time, both in creating the datasets and benchmarking them, but also the results would be very complex to interprety well.
+While interesting, I did not analyse the dataset characteristics any further because of this reason.
+
+Draco files are downloaded separately rather than loading them as embedded into compressed CityJSON files.
+This is due to a limitation in the JavaScript Draco decoder, which can only load a file from a path and can not be served a \ac{blob}.
+While I have adapted the results to the additional time that it takes to download the separate file, I would imagine this adds some extra overhead to the process.
+
+Two compression types that I had wanted to implement (Huffman coding and smaz) did not work in the end.
+It would have required more time to do this, but they might have proved to be useful.
+
+Lastly, I have used a Flask server (in Python) for the processing of files.
+This is probably not as efficient (regarding performance) as 3DCityDB, which stores data in a database and processes it on the fly as requests are made.
+Using it could give different results, but at least the on the fly compression implementation gives an indication on it.
+
+
+
+\section{Future work}
+
+To improve the workings of CityJSON with Draco, the encoding CityJSON geometries into Draco geometries can be improved by implementating direct encoding, rather than having to convert CityJSON to OBJ first.
+It was seen with both the encoding times and the results with on the fly compression that this really hampered the performance.
+Besides that it would make its use easier and if the JavaScript Draco decoder is adapted to handle individual objects well this would improve the developer experience as well.
+
+Investigating the queryability of \ac{cbor} (or another binary \ac{json} format) can also be of use, especially when datasets are compressed in advance.
+The server could then just retrieve the city objects that are requested directly, and only transmit these to the client.
+In addition to that, other binary formats might prove to yield better results than \ac{cbor}, so this should be investigated before implementing it.
+This is also the case with zlib.
+
+Creating a server implementation with 3DCityDB and testing which compression types work best with it would be nice since the performance is likely to be better than with a Flask server.
+As stated in Section~\ref{sec:limitations}, the results with on the fly compression do give an indication on which compression types are the most suitable for further investigation.

@@ -1,0 +1,63 @@
+%!TEX root = thesis.tex
+\chapter{Research questions}
+\label{chap:rq}
+
+The main research question is as follows:\\
+\textit{To what extent can the implementation of different compression techniques improve CityJSON’s web use experience, considering file size, visualisation, querying, spatial analysis, and editing performance?}\\
+
+
+To assess the extent of improvements, uncompressed CityJSON performance is taken as the baseline and performance indicators are introduced.
+The file size can simply be measured by the amount of bytes that a file takes up on the storage medium of a computer.
+The visualisation performance will be based on the rendering speed, which in the case of web use of 3D city models is the time between the retrieval of data by the client and the finishing of its rendering.\\
+
+As for querying and spatial analysis, the performance can be measured by the difference between the moment that a request has been made to perform the action and the return of results.
+The main difference here is that the former needs object attributes to be decoded, while the latter requires their geometries.
+Since the decoding time and the ability to decode objects separately are characteristics that set compression methods apart, it does not matter which type of query or spatial analysis is tested.
+Therefore simple operations are chosen which are stated in the next chapter.
+However, because of the latter characteristic it is fairer to test the performance of this on both a single and on all objects of the dataset.
+The editing will be done in a similar way, with the difference being that the edited information needs to be compressed again, for which the execution time of the algorithm is relevant.
+\\
+
+In addition to these five main indicators, there are two secondary ones.
+The lossiness of the implemented technique is assessed and asynchronous loading of object is taken into account as an ordinal indicator.
+These are less important because there are already requirements for the lossiness of the methods (loss of object ordering is acceptable while reduced coordinate accuracy and precision is not), and the latter is already of influence on querying, analysis and editing and it is more related to tiling, for which tiles could be (de)compressed separately.
+A summary of the seven performance indicators is to be seen in table~\ref{tab:indicators}.
+
+
+\begin{table}[h!]
+\begin{center}
+ \begin{tabular}{ |c || c|} 
+ \hline
+  Main performance indicators & Secondary performance indicators \\ [0.5ex] 
+ \hline\hline
+ Reduction of file size & Lossiness \\ 
+ \hline
+ Rendering time & Possibility of asynchronous loading \\
+ \hline
+ Querying time & \\
+ \hline
+ Spatial analysis time & \\
+ \hline
+ Editing time & \\
+ \hline
+\end{tabular}
+\caption{The seven performance indicators}
+\label{tab:indicators}
+\end{center}
+\end{table}
+
+
+\section{Scope} \label{scope}
+The average execution time of the (de)compression algorithms are already indirectly assessed with the indicators.
+This on itself is deemed as less important since it is part of data preparation, which is assumed to be done offline.
+Still it is important to note differences, as a significantly longer execution time can make a method less desirable.\\
+
+What will not be covered in the research is the compression of textures.
+CityJSON uses COLLADA which already has compression included in its specification \citep{collada}.\\
+
+Neither will tiling be considered.
+While being an important topic related to web use of geoinformation, it is too complex to assess different forms of its implementation into CityJSON within the time frame of the research.
+However, because of the relevance, it will be discussed whether or not it is viable to incorporate a tiling specification into CityJSON as an idea for future work.\\
+
+Lastly, the "web use experience" part of the main research question does not encompass the assessment by humans.
+It is assumed that the five aforementioned objective main criteria can sufficiently represent the user experience, with the presumption that they prefer faster performance.

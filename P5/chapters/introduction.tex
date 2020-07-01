@@ -1,0 +1,172 @@
+%!TEX root = ../thesis.tex
+
+\chapter{Introduction}
+\label{chap:introduction}
+
+\section{Motivation and problem statement}
+\label{sec:motivation}
+The possibilities of 3D city models for the analysis of the built environment are increasingly explored, and there is a continuous development in improvements on their inner workings.
+A list of applications domains and use cases for which they are exclusively suitable, or more so than traditional 2(.5)D data, includes estimation of solar irradiation, visibility analysis, energy demand estimation \citet{biljecki2015applications}.
+While many of these applications foremost need information on the geometries of the objects that are included in the study area, some require (detailed) semantics on their parts as well.
+Especially in the latter case this makes for a rapid increase in file size when the area of study is expanded.
+At the same time, there is an increase in popularity of the dissemination and direct use of geoinformation on the web \citep{gislounge, Mango2017}.
+This presents challenges in efficiency, as the network becomes a potential new bottleneck in time performance.
+
+In this thesis I focus on the improvement of the inner workings of 3D city models to attempt to relieve this problem, in specific for spreading and using them more efficiently on the web.
+I do this by investigating and testing different compression techniques on 3D city models stored in the CityJSON \citep{cityjsonspecs} format.
+These techniques decrease the file sizes of datasets allowing for faster transmission over a network, but on the other hand add additional steps to process them.
+The goal of using a compression technique is to result in a net speed gain, meaning that the time that is saved on download time should be larger than the additional time that it costs to decompress the file after receival.
+
+
+
+
+The creation of CityJSON in 2017 exemplifies the continuous developments on 3D city models, it being an encoding that is used to store the geometries and semantics of 3D cities and landscapes \citep{ledoux2019cityjson}.
+It follows the \ac{ogc} standardised CityGML data model but aims to be a better alternative to it by using the \ac{json} encoding, which for example has the advantage of making it more suitable as an international 3D geoinformation standard for web use.
+The main reason for its creation is that \ac{gml} in general is verbose and more complex to work with.
+CityJSON is more compact since \ac{json} files are already smaller than \ac{gml}, but also because it has better compression possibilities than CityGML (by storing geometries in the Wavefront OBJ \citep{Reddy} style), resulting in on average 6 times smaller file sizes.
+In addition to that, \ac{json} is smoother to use than \ac{gml} files as it is a simpler file format, making it easier to read for humans and to be used by developers.
+
+
+The compactness is an especially useful characteristic for web use since it decreases the time of data transfer over a network, and the use of compression techniques can decrease the sizes of datasets even further.
+Besides the potential improvement in data transmission efficiency that I examine in this thesis, CityJSON has not yet been fully tested in a web environment.
+Currently, 2D geoinformation is often disseminated through \ac{wfs} and \ac{wms} services, and the \ac{ogc} recently has initiated the OGC API \citep{ogcapi} that specifies how online access should be provided to collections of geospatial data.
+Because it is comprised of multiple blocks and allows for extensions, its capabilities can flexibly be increased, giving way to the support for 3D geoinformation and performing (spatial) operations on it through the web \citep{ogcapi}.
+Efforts are already made to make CityJSON compliant with the OGC API specifications \citep{Ledoux2020}.
+With this potential in mind, in this thesis I already consider the influence of the use of different compression techniques on the performance of a variety of data operations with CityJSON.
+
+
+In order to further improve the efficiency of CityJSON, this thesis investigates compression techniques that can be implemented to decrease its average file size and potentially improve its web use speed.
+Compression techniques can be all-purpose, but can also be created for a specific type of data.
+An example of the former that I test is zlib, with which a complete CityJSON dataset can be compressed at once.
+The downside of using such a technique is that the file has to be decompressed completely before it is useable.
+This can be inefficient in cases where this is not needed, for example when querying only one feature.
+In addition to that, the decompression time can be relatively long as shown in Section~\ref{sec:decodingperformance}.
+The decompression time is more important than compression time because the combination of a small file size and good decompression performance decreases the time it takes for a file to be useable after receival, while compression is (in most cases) part of dataset preparation.
+
+CityJSON has several characteristics for which specific compression techniques can be suitable.
+The main ones that are considered are the the geometries of features, their attributes and semantics, and the \ac{json} encoding itself.
+Using specific techniques on them can allow for partial decoding of compressed datasets and yield different performance results.
+With this it is important that no information is lost, as techniques can be lossy or lossless.
+The decompression speed of an algorithm is presumed to be more important than the compression speed, because decompressing is always necessary before a file is useable, while the compression is mostly part of data preparation.
+
+A way that could be incorporated for the compression of the geometries is compression with the Draco library \citep{draco}, which is an open-source library and can be used to compress and decompress 3D geometric meshes.
+The library makes use of several lossless compression techniques to encode the vertices and connectivity information of meshes, such as delta and entropy coding for the former and the Edgebreaker algorithm and parallelogram prediction for the latter (see Sections~\ref{sec:theoryedgebreaker} and~\ref{sec:seqconnectivity}).
+Draco is specifically designed to improve the efficiency of their storage and transmission \citep{draco}.
+However, it assumes simple triangular geometries as input, while CityJSON can contain complex collections of volumes that potentially have holes and cavities.
+Therefore, it requires testing to find out if it is suitable to use.
+
+In addition, the attributes and semantics can be compressed using techniques such as zlib, Huffman coding, and smaz (see Subsections~\ref{sec:zlib},~\ref{sec:huffman},~\ref{sec:smaz}).
+These reduce the redundancy in data in different ways, which I explain in Chapter~\ref{ch:theory}. 
+Lastly, the \ac{json} encoding is human-readable which comes at the cost of a slower performance and higher file size than a binary format.
+There are binary formats such as \ac{cbor} into which \ac{json} can be encoded that approach the latter's key-value structure, which would yield performance benefits at the cost of being able to easily inspect a file without decoding it.
+
+
+
+Different file formats already exist for the web use of 3D city models---\ac{b3dm} and \ac{i3s} \citep{b3dm, i3sspecsmain}, see Sections~\ref{sec:b3dm} and~\ref{sec:i3s}---and they focus on high performance, which this thesis aims at as well.
+But for performance they do not only regard the time that it simply takes to load a file but also incorporate other features that benefit user experience such as tiling, which enables only specific parts of the dataset to be loaded, or rendered in a different \ac{lod}.
+In addition, they combine binary structures and \ac{json} and allow for the use of Draco geometries.
+However, the focus on high performance makes them relatively complex to use for developers, as opposed to CityJSON that aims to be developer-friendly.
+While CityJSON or compressed variants might not be able to outperform these other file types, it is still suitable to use on the web when the best performance is not necessary, because of its ease of use.
+This does not mean that its performance should be neglected---compression can be of added value, but only if CityJSON's simplicity is mostly retained.
+
+Besides that, the purpose of tiling is mostly to improve the streaming and visualisation of geospatial data \citep{3dtiles}.
+There are however more use cases for which a geoinformation web service could be utilised, some of which could be easier to implement with CityJSON.
+Users might want to download a subset of the data per specified attributes or bounding box to avoid having to download unneeded information, editing functionalities can come in handy for crowd-sourced initiatives such as OpenStreetMap, and the ability to do spatial analysis can help it function as a cloud-based GIS application.
+Therefore the influence of using compression techniques is tested for several types of data operations.
+
+Concretely, I test a variety of combinations of compression techniques on multiple CityJSON datasets, and assess them on their performance when executing different data operations with them.
+The operations are divided into five categories: visualisation, querying, spatial analysis, editing of attributes, and editing of geometries.
+Besides that the difference in file size is considered for lower storage space and the lossiness induced by the combination of compression techniques as all important information should be retained.
+The tested datasets have different characteristics since they can influence the workings of compression techniques, and I introduce a web application that is created for the testing of implementations.
+This testing platform is a Flask application that acts as a server to process requests, which in turn renders a web page that works with Three.js and Harp.gl to render datasets.
+
+
+
+\section{Research question}
+\label{sec:researchq}
+
+The main research question of the thesis is as follows:
+\textit{To what extent can the implementation of different compression techniques improve CityJSON’s performance on the web, considering file size, visualisation, querying, spatial analysis, and editing performance?}
+
+
+To assess the impact that different compression techniques have, I take uncompressed CityJSON performance as the baseline and performance indicators are defined as derived from Section~\ref{sec:motivation}, shown in Table~\ref{tab:indicators}.
+I name it uncompressed for simplicity but all tested CityJSON datasets include the \texttt{"transform"} member, meaning that the origin of the set of vertices is moved to (0, 0, 0) and that their coordinates are represented as integers (see Section~\ref{sec:cityjsonexplained} for a more detailed explanation)---which is in fact a form of compression already.
+Some datasets originally had \texttt{"transform"} already and Draco requires vertices to be stored in this way to compress them, which is why I have chosen to make the datasets more uniform as to have one factor less to consider when interpreting the results.
+
+For the visualisation, Three.js is used and the performance depends on the speed of the parsing of CityJSON geometries to a Three.js mesh and rendering it.
+As for querying and spatial analysis, the performance can be measured by the difference between the moment that a request has been made to perform the operation and the return of results.
+The main difference here is that the former needs object attributes to be decoded, while the latter requires their geometries.
+Since the decoding time and the ability to decode objects separately are characteristics that set compression methods apart, it does not matter which type of query or spatial analysis is tested.
+However, because of the latter characteristic it is fairer to test the performance of this on both a single and on all objects of the dataset.
+The editing is done in a similar way, with the difference being that the edited information needs to be compressed again, for which the execution time of the algorithm becomes relevant.
+For these four performance indicators the execution time of corresponding operations---which are defined in Chapter~\ref{ch:impl}---is benchmarked.
+
+Besides these, there are two characteristics that do not involve a time benchmark.
+The file size can be measured by the amount of bytes that a file takes up, with smaller files having the advantage that less storage space is needed and that they are transmitted over the web more quickly.
+The last point is the assessment of the lossiness of a compression type.
+No vital information from the original dataset should be lost---for instance loss of object ordering is acceptable while reduced coordinate accuracy and precision is not---as this would render the compression unusable for certain applications.
+
+
+\begin{table}[h!]
+\begin{center}
+ \begin{tabular}{ |c|c|} 
+ \hline
+  Compression type performance indicators & Section \\ [0.5ex] 
+ \hline\hline
+ Visualisation time & \ref{bmvisualisation}  \\
+ \hline
+ Querying time & \ref{bmquerying}  \\
+ \hline
+ Spatial analysis time & \ref{bmbuffering} \\
+ \hline
+ Editing time & \ref{bmeditingattr} \& \ref{bmeditinggeom}  \\
+ \hline
+ File size compression & \ref{sec:filesizeperformance}  \\ 
+ \hline
+ Lossiness & \ref{lossiness} \\
+ \hline
+\end{tabular}
+\caption{The six performance indicators on which variants of compressed CityJSON are assessed, and the sections where they are addressed}
+\label{tab:indicators}
+\end{center}
+\end{table}
+
+
+\section{Scope} \label{sec:scope}
+The average execution time of the (de)compression algorithms are indirectly assessed with the indicators.
+Decompression is always done before a file can be used, and compression is done after editing a file.
+For this reason these are not seen as separate performance indicators.
+They are still benchmarked however because it can give more insight on what causes the differences in performance between compression types.
+Additionally a significantly longer execution time can make an implementation less desirable.
+
+What I do not cover in the thesis is the compression of textures and materials.
+They are structured differently from the other parts of CityJSON and would therefore have to be investigated thoroughly to find suitable compression techniques, and most existing datasets (as retrieved from \citet{cityjsondatasets}) do not contain them.
+For this reason I consider it as future work.
+
+The OGC API is mostly introduced (in Section~\ref{sec:ogcapi}) to give context about the current developments on the dissemination of geospatial information.
+It is not implemented in this thesis, but Section~\ref{sec:experiments} shows an experiment on the compression of datasets that is useful when streaming datasets.
+Features can be compressed individually and streamed following the specification, so I did initial compression implementations in this way to see if it is worth it to investigate it further.
+
+Tiling is explained as well (see Section~\ref{sec:3dtiles}).
+While being an important topic related to efficient web use of geoinformation, it is too complex to assess different ways to implement it into CityJSON within the time frame of the research and see if it is worthwile to do it.
+However, because of the relevance, it is discussed whether or not it is viable to incorporate a tiling specification into CityJSON as an idea for future work, and how compression could be related to it.
+
+Lastly, the "web use experience" part of the main research question does not encompass the assessment by humans.
+I am assuming that the six aforementioned objective main criteria of Table~\ref{tab:indicators} can sufficiently represent the user experience, with the presumption that they prefer faster performance.
+
+
+\section{Thesis overview and preview of results}
+Chapter~\ref{ch:theory} discusses theory on compression and techniques that are either used in the thesis or concepts that are needed to explain other techniques.
+Subsequently Chapter~\ref{chap:rw} gives an explanation on CityJSON and existing file formats and concepts that are related to efficient web use of 3D models.
+Chapter~\ref{ch:meth} gives an overview of the methodology used to prepare CityJSON datasets, compress them, and assess their performance.
+Then, Chapter~\ref{ch:impl} explains with more details how the research is carried out by explaining variants of compressed CityJSON and the testing platform, and experiments that require further exploration, are done to make decisions in the implementation, or help explaining the results.
+After that Chapter~\ref{ch:bmresults} shows the results of the six performance indicators for different compression implementations.
+As the last main part of the thesis, I discuss in Chapter~\ref{ch:conclusion} what has been achieved, what I think would be the best compression options to consider to actually implement, and how CityJSON could evolve with tiling and the OGC API.
+Lastly there is Chapter~\ref{ch:streaming} on the streaming of CityJSON, which explains a different way of serving CityJSON data than is used in this thesis, and how compression can be useful for it.
+
+The thesis shows results as good as 9\% of the time to perform an operation with a compressed dataset as compared to doing the same thing with original CityJSON.
+That is the case when buffering all features of large datasets.
+However, there are also use cases for which it is not (very) beneficial to use compression, such as querying or buffering one feature.
+In general you see that operations on larger datasets benefit the most from compression.
+The influence of specific dataset characteristics however proves hard to analyse.
+In the end it is best to use compression techniques that are easy to implement and that work well all-round, rather than very good in specific use cases.

@@ -1,0 +1,763 @@
+
+
+\chapter{Datasets and characteristics}
+\label{ch:datasets}
+These are snippets of the eight CityJSON datasets used in this thesis.
+One City Object is shown and only a small part of the geometry.
+In orange are the attributes and in green the geometries.
+
+\clearpage
+
+\section{Delft}
+
+\begin{scriptsize}
+\begin{minipage}[c]{\linewidth / 1}
+
+\lstdefinestyle{base}{
+backgroundcolor=\color{lichtgrijs}, 
+  emptylines=1,
+  breaklines=true,
+basicstyle=\ttfamily\color{black},
+  moredelim=**[is][\color{orange}]{@}{@},
+moredelim=**[is][\color{Green}]{|}{|},
+}
+
+\begin{lstlisting}[frame=single,style=base,caption={Snippet of Delft dataset}, label=dataset:delft]
+{
+    "type": "CityJSON",
+    "version": "1.0",
+    "metadata": {
+        "geographicalExtent": [
+            84616.468, 447422.999, -0.47,
+            85140.839, 447750.636, 13.8
+        ],
+        "referenceSystem": "urn:ogc:def:crs:EPSG::7415"
+    },
+    "CityObjects": {
+        "b0a8da4cc-2d2a-11e6-9a38-393caa90be70": {
+            @"attributes": {
+                "bgt_status": "bestaand",
+                "bronhouder": "G0503",
+                "class": "dek",
+                "creationdate": "2014-07-09",
+                "eindregistratie": "",
+                "hoortbijtypeoverbrugging": "waardeOnbekend",
+                "inonderzoek": "0",
+                "lokaalid": "G0503.032e68f09d7049cce0532ee22091b28c",
+                "lv_publicatiedatum": "2016-06-07T16:22:15.000",
+                "namespace": "NL.IMGeo",
+                "overbruggingisbeweegbaar": "0",
+                "plus_status": "geenWaarde",
+                "relatievehoogteligging": "1",
+                "terminationdate": "",
+                "tijdstipregistratie": "2016-05-17T13:43:18.000"
+            },@
+            |"geometry": [
+                {
+                    "boundaries": [ 
+                        [ [ 11337, 7, 9 ] ],
+                        [ [ 11337, 43, 7 ] ],
+                        [ [ 14, 15, 13 ] ], ... 
+                        ],
+                    "lod": 1,
+                    "type": "MultiSurface"
+                }
+            ],
+            "type": "Bridge"
+        }|
+    },
+    "transform": {	
+        "scale": [	
+            0.001, 0.001, 0.001	
+            ].	
+        "translate": [	
+            84616.468,	447422.999,	-0.47		
+    },
+    |"vertices": [
+        [ 85012.343, 447455.577, -0.27 ],
+        [ 85010.804, 447448.808, -0.27 ],
+        [ 85013.832, 447447.447, -0.27 ], ... 
+        ]|
+}
+\end{lstlisting}
+
+
+\end{minipage}
+\end{scriptsize}
+
+
+
+\section{Den Haag}
+
+\begin{scriptsize}
+\begin{minipage}[c]{\linewidth / 1}
+
+\lstdefinestyle{base}{
+backgroundcolor=\color{lichtgrijs}, 
+  emptylines=1,
+  breaklines=true,
+basicstyle=\ttfamily\color{black},
+  moredelim=**[is][\color{orange}]{@}{@},
+moredelim=**[is][\color{Green}]{|}{|},
+}
+
+\begin{lstlisting}[frame=single,style=base,caption={Snippet of Den Haag dataset}, label=dataset:denhaag]
+{
+    "type": "CityJSON",
+    "version": "1.0",
+    "CityObjects": {"GUID_DBDABF53-7DD5-4C2F-BE7F-51F29A0CBA16_1":
+    {"type":"BuildingPart",
+    @"attributes":{
+        "roofType":"1000",
+        "RelativeEavesHeight":3.133,
+        "RelativeRidgeHeight":3.133,
+        "AbsoluteEavesHeight":7.717,
+        "AbsoluteRidgeHeight":7.717
+    },@
+    |"geometry":[
+        {"type":"Solid",
+        "boundaries":[
+            [[[10915,10991,10992,10916]],[[10991,10993,10994,10992]],[[10993,10995,10996,10994]], ...],|
+        "semantics":{
+    "values":[[0,1,2,3,4,5]],
+    "surfaces":[
+        {"type":"WallSurface"},
+        {"type":"WallSurface"},
+        {"type":"WallSurface"},
+        {"type":"WallSurface"},
+        {"type":"RoofSurface","Direction":0,"Slope":90},
+        {"type":"GroundSurface"}]},
+    "material":{
+        "":{"values":[
+            [2313,2313,2313,2313,2314,2315]]}},
+    "lod":2}],
+    "parents":["GUID_DBDABF53-7DD5-4C2F-BE7F-51F29A0CBA16"]},
+    ...},
+    |"vertices": {
+	[[506451,10377,5928],[506316,403,5941],[511459,5304,5921], ...]
+    },|	
+    "metadata": {
+        "geographicalExtent": [	
+        78248.66,
+        457604.591,
+        2.463,
+        79036.024,
+        458276.439,
+        37.481
+        ],	
+        "referenceSystem": "urn:ogc:def:crs:EPSG::7415"	
+        },	
+    "transform": {	
+        "scale": [	
+            0.001,	
+            0.001,	
+            0.001	
+            ].	
+        "translate": [	
+            78248.66,
+            457604.591,
+            2.463	
+    }
+}
+\end{lstlisting}
+
+
+\end{minipage}
+\end{scriptsize}
+
+
+\section{Montréal}
+
+\begin{scriptsize}
+\begin{minipage}[c]{\linewidth / 1}
+
+\lstdefinestyle{base}{
+backgroundcolor=\color{lichtgrijs}, 
+  emptylines=1,
+  breaklines=true,
+basicstyle=\ttfamily\color{black},
+  moredelim=**[is][\color{orange}]{@}{@},
+moredelim=**[is][\color{Green}]{|}{|},
+}
+
+\begin{lstlisting}[frame=single,style=base,caption={Snippet of Montréal dataset}, label=dataset:montreal]
+{
+    "type": "CityJSON",
+    "version": "1.0",
+    "metadata": {
+        "geographicalExtent": [
+            300060.181, 5040722.785, 8.444,
+            301073.701, 5042282.343, 129.092
+        ]
+    },
+    "CityObjects": {
+        "B-201391182746-80FE6BE00A9C": {
+            "type": "Building",
+            |"geometry": [
+                {
+                    "type": "MultiSurface",
+                    "boundaries": [
+                        [
+                            [
+                                22432, 22433, 22434
+                            ]
+                        ],
+                        [
+                            [
+                                22434, 22435, 22436
+                            ]
+                        ],
+                        ...
+                    ],|
+                    "semantics": {
+                        "values": [
+                            0, 0, 0,
+                            ...
+                        ],
+                        "surfaces": [
+                            {
+                                "type": "GroundSurface"
+                            },
+                            {
+                                "type": "WallSurface"
+                            },
+                            ...
+                        ]
+                    },
+                    "texture": {
+                        "Rhino   texturing": {
+                            "values": [
+                                [
+                                    [
+                                        238, 63606, 63606, 63606
+                                    ]
+                                ],
+                                [
+                                    [
+                                        238, 63606, 63606, 63606
+                                    ]
+                                ],
+                                ...
+                            ]
+                        }
+                    },
+                    "lod": 2
+                }
+            ]
+        }
+    },
+    |"vertices": [
+        [
+            300762.679, 5041624.941, 14.274
+        ],
+        [
+            300749.896, 5041617.688, 14.274
+        ],
+        [
+            300755.943, 5041628.802, 14.274
+        ],
+        ...
+    ]|
+}
+\end{lstlisting}
+
+
+\end{minipage}
+\end{scriptsize}
+
+
+
+\section{New York}
+
+
+\begin{scriptsize}
+\begin{minipage}[c]{\linewidth / 1}
+
+\lstdefinestyle{base}{
+backgroundcolor=\color{lichtgrijs}, 
+  emptylines=1,
+  breaklines=true,
+basicstyle=\ttfamily\color{black},
+  moredelim=**[is][\color{orange}]{@}{@},
+moredelim=**[is][\color{Green}]{|}{|},
+}
+
+\begin{lstlisting}[frame=single,style=base,caption={Snippet of New York dataset}, label=dataset:newyork]
+
+{
+    "type": "CityJSON",
+    "version": "1.0",
+    "metadata": {
+        "geographicalExtent": [
+            985320.346, 219464.155, -1.5,
+            1009996.302, 259992.617, 677.862
+        ]
+    },
+    "CityObjects": {
+        "gml_7KKGXJDCBAXCTELB70OMHK04I376NBA6NGHC": {
+            "type": "Building",
+            @"attributes": {
+                "SOURCE_ID": "13210006270",
+                "BIN": "1061273",
+                "DOITT_ID": "168309"
+            },@
+            |"geometry": [
+                {
+                    "type": "MultiSurface",
+                    "boundaries": [
+                        [
+                            [
+                                327517,
+                                327518,
+                                327519,
+                                ...
+                            ]
+                        ],
+                        ...
+                    ],|
+                    "semantics": {
+                        "values": [
+                            0,
+                            1,
+                            2,
+                            ...
+                        ],
+                        "surfaces": [
+                            {
+                                "type": "GroundSurface",
+                                "SOURCE_ID": "13210006270",
+                                "BIN": "1061273",
+                                "DOITT_ID": "168309"
+                            },
+                            ...
+                        ]
+                    },
+                    "lod": 2
+                }
+            ]
+        }
+    },
+    |"vertices": [
+        [
+            19709059, 40053117, 21766
+        ],
+        [
+            19699777, 40061095, 21766
+        ],
+        [
+            19682224, 40040679, 21766
+        ],
+        ...
+    ]|
+}
+
+\end{lstlisting}
+
+
+\end{minipage}
+\end{scriptsize}
+
+
+\section{Rotterdam}
+
+\begin{scriptsize}
+\begin{minipage}[c]{\linewidth / 1}
+
+\lstdefinestyle{base}{
+backgroundcolor=\color{lichtgrijs}, 
+  emptylines=1,
+  breaklines=true,
+basicstyle=\ttfamily\color{black},
+  moredelim=**[is][\color{orange}]{@}{@},
+moredelim=**[is][\color{Green}]{|}{|},
+}
+
+\begin{lstlisting}[frame=single,style=base,caption={Snippet of Rotterdam dataset}, label=dataset:rotterdam]
+
+
+{
+    "type": "CityJSON",
+    "version": "1.0",
+    "metadata": {
+        "referenceSystem": "urn:ogc:def:crs:EPSG::28992",
+        "geographicalExtent": [
+            92824.468, 436417.288, -7.436, 93947.37, 437464.569, 126.071
+        ],
+        "presentLoDs": {
+            "1.0": 546, "2.0": 550
+        }
+    },
+    "CityObjects": {
+        "ID_0599100000643092": {
+            "address": {
+                "CountryName": "Nederland", "LocalityName": "Rotterdam",
+                ...
+                "location": {
+                    "type": "MultiPoint",
+                    "boundaries": [
+                        20
+                    ],
+                    "lod": 0
+                }
+            },
+            "type": "Building",
+            @"attributes": {
+                "yearOfConstruction": 1983, "creationDate": "2019-06-11", "gebouwnummer": "0599100000643092",
+                ...
+            },@
+            "geographicalExtent": [
+                93460.98, 437063.18, 3.01130000000232, 93471.11, 437072.8, 9.69260888055718
+            ],
+            |"geometry": [
+                {
+                    "type": "Solid",
+                    "boundaries": [ [
+                        [ [ 0, 1, 2, 3 ] ],
+                            ...
+                        ]
+                    ],
+                    "lod": 1
+                },
+                {
+                    "type": "Solid",
+                    "boundaries": [
+                        [ [
+                                [ 2, 11, 9, 6, 4, 3 ] ],
+                            ...
+                        ]
+                    ],|
+                    "semantics": {
+                        "values": [
+                            [ 0, 1, 2,
+                                ... ]
+                        ],
+                        "surfaces": [
+                            {
+                                "type": "GroundSurface", "id": "UUID_d7d650ac-6751-4285-aaac-ed6b4929d23c",
+                                "creationDate": "2019-06-11"
+                            },
+                            ...
+                        ]
+                    },
+                    "texture": {
+                        "RhinoCity texturing": {
+                            "values": [
+                                    [ [ 0, 0, 1, ... ] ],
+                                    ...
+                                ] ]
+                        }
+                    },
+                    "lod": 2
+                }
+            ]
+        }
+    },
+    |"vertices": [
+        [
+            646642, 651352, 14924
+        ],
+        ...
+    ]|
+}
+
+\end{lstlisting}
+
+
+\end{minipage}
+\end{scriptsize}
+
+
+
+\section{Singapore}
+
+
+\begin{scriptsize}
+\begin{minipage}[c]{\linewidth / 1}
+
+\lstdefinestyle{base}{
+backgroundcolor=\color{lichtgrijs}, 
+  emptylines=1,
+  breaklines=true,
+basicstyle=\ttfamily\color{black},
+  moredelim=**[is][\color{orange}]{@}{@},
+moredelim=**[is][\color{Green}]{|}{|},
+}
+
+\begin{lstlisting}[frame=single,style=base,caption={Snippet of Singapore dataset}, label=dataset:hdb]
+
+{
+    "type": "CityJSON",
+    "version": "1.0",
+    "metadata": {
+        "datasetTitle": "3D city model of public housing (HDB) buildings in Singapore",
+        "datasetReferenceDate": "2019-08-25",
+        "geographicLocation": "Singapore, Republic of Singapore",
+        "referenceSystem": "urn:ogc:def:crs:EPSG::3414",
+        "geographicalExtent": [
+            11474.615816611371, 28054.808157231186, 0,
+            45326.44585339671, 48758.78176700817, 141.3
+        ],
+        "datasetPointOfContact": {
+            "contactName": "NUS Urban Analytics Lab, National University of Singapore",
+            "emailAddress": "filip nus.edu.sg",
+            "contactType": "organization",
+            "website": "https://ual.sg/"
+        },
+        "metadataStandard": "ISO 19115 - Geographic Information - Metadata",
+        "metadataStandardVersion": "ISO 19115:2014(E)"
+    },
+    "CityObjects": {
+        "way172927954": {
+            "type": "Building",
+            @"attributes": {
+                "osm_timestamp": "2016-06-25T01:20:18",
+                "osm_version": 3,
+                "osm_changeset": 40274256,
+                "osm_user": "JaLooNz",
+                "osm_uid": 741163,
+                "osm_building": "residential",
+                "osm_addr:city": "Singapore",
+                "osm_addr:street": "Beach Road",
+                ......@
+            },
+            |"geometry": [
+                {
+                    "type": "Solid",
+                    "lod": 1,
+                    "boundaries": [
+                        [
+                            [
+                                [
+                                    0, 1, 2, 3
+                                ]
+                            ],
+                            [
+                                [
+                                    1, 4, 5, 2
+                                ]
+                            ],
+                            ...
+                        ]
+                    ]
+                }
+            ]|
+        }
+    },
+   | "vertices": [
+        [
+            199673130715612, 36984818430307, 0
+        ],
+        [
+            199701511315904, 36869046893490, 0
+        ],
+        [
+            199701511315904, 36869046893490, 461000000000
+        ],
+        ...
+    ]|
+}
+
+\end{lstlisting}
+
+
+\end{minipage}
+\end{scriptsize}
+
+
+\section{TU Delft campus}
+
+
+\begin{scriptsize}
+\begin{minipage}[c]{\linewidth / 1}
+
+\lstdefinestyle{base}{
+backgroundcolor=\color{lichtgrijs}, 
+  emptylines=1,
+  breaklines=true,
+basicstyle=\ttfamily\color{black},
+  moredelim=**[is][\color{orange}]{@}{@},
+moredelim=**[is][\color{Green}]{|}{|},
+}
+
+\begin{lstlisting}[frame=single,style=base,caption={Snippet of TU Delft campus dataset}, label=dataset:tudelft]
+
+{
+    "type": "CityJSON",
+    "version": "1.0",
+    "metadata": {
+        "geographicalExtent": [
+            84527.3237110656, 444659.804912295, 0.0,
+            86603.7691803278, 447427.906238934, 0.0
+        ],
+        "referenceSystem": "urn:ogc:def:crs:EPSG::7415"
+    },
+    "CityObjects": {
+        "b00a922cc-e6d0-11e7-951f-610a7ca84980": {
+            @"attributes": {
+                "bgt-functie": "fietspad",
+                "bgt-fysiekvoorkomen": "open verharding",
+                "bgt-status": "bestaand",
+                "bronhouder": "G0503",
+                "creationdate": "2017-11-22",
+                "eindregistratie": "",
+                "inonderzoek": "0",
+                "lokaalid": "G0503.028ec3c1e25143e3b667dba12130f554",
+                "lv-publicatiedatum": "2017-12-04T11:39:48.000",
+                "namespace": "NL.IMGeo",
+                "plus-functiewegdeel": "waardeOnbekend",
+                "plus-fysiekvoorkomenwegdeel": "betonstraatstenen",
+                "plus-status": "geenWaarde",
+                "relatievehoogteligging": "0",
+                "terminationdate": "",
+                "tijdstipregistratie": "2017-12-04T11:13:31.000",
+                "wegdeeloptalud": "0",
+                "class": "Wegdeel",
+                "function": "open verharding"
+            },@
+            |"geometry": [
+                {
+                    "boundaries": [
+                        [
+                            [
+                                0,
+                                1,
+                                2
+                            ]
+                        ],
+                        [
+                            [
+                                1,
+                                3,
+                                2
+                            ]
+                        ]
+                    ],
+                    "lod": 1,
+                    "type": "MultiSurface"
+                }
+            ],
+            "type": "Road"
+        }|
+    },
+    |"vertices": [
+        [
+            1618304, 572011, 98810
+        ],
+        [
+            1625102, 574863, 98980
+        ],
+        [
+            1617445, 574088, 98810
+        ],
+        ...
+    ]|
+}
+
+\end{lstlisting}
+
+
+\end{minipage}
+\end{scriptsize}
+
+
+
+\section{Zürich}
+
+
+\begin{scriptsize}
+\begin{minipage}[c]{\linewidth / 1}
+
+\lstdefinestyle{base}{
+backgroundcolor=\color{lichtgrijs}, 
+  emptylines=1,
+  breaklines=true,
+basicstyle=\ttfamily\color{black},
+  moredelim=**[is][\color{orange}]{@}{@},
+moredelim=**[is][\color{Green}]{|}{|},
+}
+
+\begin{lstlisting}[frame=single,style=base,caption={Snippet of Zurich dataset}, label=dataset:zurich]
+
+
+{
+    "type": "CityJSON",
+    "version": "1.0",
+    "metadata": {
+        "geographicalExtent": [
+            2677116.375, 1241839.025, 0.0,
+            2689381.984, 1254150.95, 1044.25
+        ],
+        "presentLoDs": {
+            "2.0": 145865
+        }
+    },
+    "CityObjects": {
+        "UUID_93fc5bae-4446-4336-9ff8-6679ebfdfde3": {
+            "type": "BuildingPart",
+            @"attributes": {
+                "creationDate": "2017-01-23",
+                "Geomtype": 1
+            },@
+            "geographicalExtent": [
+                2678701.758, 1252228.936, 509.796,
+                2678714.997, 1252238.97, 519.178
+            ],
+            "parents": [
+                "UUID_c9884c4e-1cac-47f5-b88b-6fb074c0ae50"
+            ],
+            |"geometry": [
+                {
+                    "type": "MultiSurface",
+                    "boundaries": [
+                        [
+                            [
+                                0, 1, 2, 3
+                            ]
+                        ],
+                        [
+                            [
+                                3, 4, 5, 0
+                            ]
+                        ],
+                        ...
+                    ],|
+                    "semantics": {
+                        "values": [
+                            0,
+                            1,
+                            2,
+                            ...
+                        ],
+                        "surfaces": [
+                            {
+                                "type": "GroundSurface"
+                            },
+                            {
+                                "type": "WallSurface"
+                            },
+                            ...
+                        ]
+                    },
+                    "lod": 2
+                }
+            ]
+        }
+    },
+    |"vertices": [
+        [
+            1587680, 10389911, 509796
+        ],
+        [
+            1585382, 10394788, 509796
+        ],
+        [
+            1596325, 10399945, 509796
+        ]
+    ]|
+}
+
+\end{lstlisting}
+
+
+\end{minipage}
+\end{scriptsize}

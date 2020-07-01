@@ -1,0 +1,149 @@
+%!TEX root = thesis.tex
+\chapter{Streaming}
+\label{ch:streaming}
+
+This is an additional Chapter on the streaming of CityJSON datasets.
+It is extra work that does not fit well in the other Chapters as it distracts from the main parts of the thesis.
+First I explain what the OGC API is, then how CityJSON could be streamed complying with it, and lastly how compression is relevant to it.
+
+\section{OGC API}
+\label{sec:ogcapi}
+The OGC API \citep{Consortium2020} is a new specification that defines how to provide online access to geospatial data.
+This is done in a modular way, with several building blocks that can be used together as needed when creating a RESTful Web API for geospatial information.
+It succeeds the older well-known OGC standards such as WMS and WFS.
+With CityJSON being an encoding for 3D features we focus on the OGC API Features block, which could be seen as the successor of WFS2 (and it was formerly named WFS3) \citep{OGC2020, Consortium2020}.
+
+This block consists of multiple modules as well (on \ac{crs}, \ac{cql}, and simple transactions) and has the possibility to be extended with more modules.
+In contrast with WFS, OGC API Features is created with other file encodings than XML in mind.
+This enables to make it work with JSON and HTML easily, which is encouraged but not mandatory as any encoding may be used \citep{Consortium2020, Consortium2019}.
+Because of this, it is possible to make CityJSON compliant with the specifications of the API.
+Ultimately, any kind of geospatial data consisting of features can be served following the guidelines of the OGC API, as long as a specification is created for it.
+
+The API works through visiting specifically formatted links that indicate what kind of data is requested from a server.
+The base URL of the server (with path \texttt{"/"}) needs to provide links the to:
+
+\begin{enumerate}
+
+\item The API definition---the capabilities of the server
+\item The Conformance declaration---URIs referring to the standards that the server implements
+\item The Collections---the datasets that are available on the server
+
+\end{enumerate}
+
+By visiting specifically formatted links, Collections can be queried as desired and are served in the requested encoding.
+Information on the Collections is found following the \texttt{/collections} path, with \texttt{/collections/\{collectionId\}} showing more detailed information on a specific Collection.
+\texttt{/collections/{collectionId}/items} will return the full dataset, and with \\
+ \texttt{/collections/{collectionId}/item/{itemId}} one specific feature can be retrieved.
+
+It is mandatory to provide a function to query the features of a Collection on a bounding box in for example the following way: \texttt{/collections/\{collectionId\}/?bbox=160.6,-55.95,-170,-25.89}.
+Similarly to WFS, it should be possible to include a \texttt{limit} parameter in the link to only receive a maximum amount of features.
+Combining this with an \texttt{offset} parameter, it is possible to stream the data.
+For instance \texttt{/collections/\{collectionId\}/item/\{itemId\}/limit=10\&offset=0} would return the first 10 features of the requested dataset.
+By increasing the offset by 10 in every new request, the full dataset is traversed.
+Other specific queries could be formatted in a similar manner as well.
+These are the most important requirements, but not all are listed and there are also more recommended implementation details \citep{OGC2019}.
+
+
+Currently the use of the API has been mostly described in liaison with GeoJSON \citep{GeoJSON}, which is recommended, and the WGS84 CRS which is the default.
+A server would return a GeoJSONCollection or GeoJSONFeature when data is requested.
+It is however possible to use a different file encoding and a different CRS when the CRS module is used \citep{OGC2019}.
+Section~\ref{sec:streamingcityjson} therefore explains how CityJSON could be used in accordance with the OGC API.
+
+
+
+% OpenAPI?
+%The specification however allows for more advanced data provision on for example the editing of datasets and other coordinate reference systems, but also leaves the option for the creation of extensions to enable different file formats than GeoJSON to be served \citep{ogcapi}.
+
+
+
+% OGC API - Tiles: https://github.com/opengeospatial/OGC-API-Tiles/tree/master/core
+
+\section{Streaming CityJSON}
+\label{sec:streamingcityjson}
+GeoJSON \citep{GeoJSON} does not support 3D data, and for OGC API to work with 3D data a new specification would have to be written.
+A CityJSON object can already be seen as a collection of features.
+It can therefore be argued that its original structure is already OGC API compliant since the specification allows for flexibility in data structures that servers return.
+However, the streaming of datasets is part of the OGC API specification since it is possible to add \texttt{limit} and \texttt{offset} parameters to a link.
+
+For this purpose a draft \citep{Ledoux2020} has been made to make CityJSON compliant to the OGC API as it is implemented now (with GeoJSON), and to enable streaming.
+Because CityJSON has the list of vertices at the end of the file rather than per city object, it is not possible to stream it in the fashion that it is done with GeoJSON.
+With GeoJSON, the receiver of the stream is fed with GeoJSON Features or FeatureCollections in line-delimited JSON.
+Once received, it can be used immediately as it already includes the complete geometry.
+
+In order to enable CityJSON to stream in a similar way, the structure of listing~\ref{ls:cjogcapi} is proposed by \citet{Ledoux2020}.
+The \texttt{"type"} is now a CityJSONFeature rather than a CityJSON object.
+\texttt{"CityObjects"} contains a parent and its children, with the \texttt{"id"} of the CityJSONFeature being the one of the parent.
+All their vertices can now be accessed immediately, without needing to have the whole file.
+A CityJSONFeature can thus be loaded in the same manner as a CityJSON, thus avoiding the need to adapt the software that will use it.
+In Section~\ref{streamingcompression} I investigate how compression could be implemented for streaming.
+
+
+
+\begin{lstlisting}[frame=single,style=base,caption={Snippet of OGC API compliant CityJSON structure. Source: \citet{Ledoux2020}}, label=ls:cjogcapi]
+{
+  "type": "CityJSONFeature",
+  "id": "myid", //-- to clearly identify which of the CityObjects is the "main" one
+  "CityObjects": {},
+  "vertices": [],
+  "appearance": {},
+}
+\end{lstlisting}
+
+
+\section{Streaming CityJSON and compression}
+\label{streamingcompression}
+
+Subsection~\ref{sec:streamingcityjson} has introduced a proposal for a structure in which CityJSON could be streamed over the web.
+Streaming is related to the efficient web use of 3D geoinformation, but it is not within the scope of this thesis to test streaming performance.
+Despite that I have looked into how compression can potentially contribute to efficient streaming to see if it is worthwhile to investigate it further in the future.
+
+Listing~\ref{ls:cjogcapi} shows how CityJSONFeatures look like, which can be streamed individually as they contain their own array of vertices.
+This gives the possibility to compress the geometry of a CityJSONFeature with Draco.
+There are two ways to do this: compressing every City Object of a Feature into individual Draco geometries (which would then be a parent with its children), and compressing all City Objects of a Feature together in one Draco geometry.
+The former option removes the need of having to separate objects within the Draco file, thus object IDs not needing to be stored inside.
+With the second option this does have to be done (just like when compressing complete CityJSON datasets)---but only if the Feature contains multiple City Objects---, but having one Draco file might be more efficient as the header of the file is relatively smaller.
+
+A caveat is that datasets need to have \texttt{"transform"} to be able to be compressed properly with Draco, while the streaming implementation currently does not allow this \citet{Ledoux2020}.
+Additionally, since Draco \ac{blob}s can not be stored in \ac{json} it is necessary to parse the file into a binary format, for which \ac{cbor} is already used throughout the thesis.
+\ac{cbor} on its own however can also potentially improve the performance.
+
+The file sizes of four streaming variants of the datasets used in this thesis are shown in Table~\ref{tab:streamingcompression}.
+The CityJSONFeatures of every dataset are aggregated in a CityJSONFeatureCollection, akin to GeoJSON's FeatureCollection.
+The "collection" column this represents uncompressed CityJSON datasets that can be used for streaming.
+"collection-cbor" is compressed with \ac{cbor}, "collection-cbor-draco" includes individual Draco \ac{blob}s for every City Object of a CityJSONFeature, and "collection-cbor-draco2" has one Draco \ac{blob} per CityJSONFeature.
+
+\begin{table}[h!]
+\begin{center}
+ \begin{tabular}{ |c ||c|c|c|c|} 
+ \hline
+  Dataset & collection & collection-cbor & collection-cbor-draco & collection-cbor-draco2 \\ 
+ \hline \hline
+ Delft & 1.2 & 0.7 & 0.6 & 0.6 \\
+ \hline
+ Den Haag & 3.3 & 2.4 & 2.4 & 2.3 \\ 
+ \hline
+ Rotterdam & 3.9 & 2.5 & 2.6 & 2.6 \\
+ \hline
+ Montréal & 5.4 & 3.5 & 2.9 & 2.9 \\
+ \hline
+ Singapore & 54.5 & 34.4 & 32.1 & 32.1 \\
+ \hline
+   TU Delft campus & 70.6 & 41.8 & 25.5 & 25.5 \\
+ \hline
+ New York & 109.8 & 69.7 & 70.2 & 70.2 \\
+ \hline
+ Zürich & 284.2 & 182.5 & 163.2 & 165.6 \\
+ \hline
+\end{tabular}
+\caption{File size in MB for CityJSONCollections of datasets and compressed versions}
+\label{tab:streamingcompression}
+\end{center}
+\end{table}
+
+It is shown that using \ac{cbor} already compresses the files, and possibly increases the reading and loading speed as compared to \ac{json} (see Section~\ref{sec:cbor} for an explanation on this).
+The addition of Draco compression is only worth it for datasets in which City Objects have parent-child relationships.
+The way in which Draco is incorporated is almost completely insignificant---the second Draco implementation gives a slightly better result for Den Haag, but a worse result with Zürich.
+
+Concludingly, compression can be beneficial for streaming as well.
+But while the implementation with \ac{cbor} could easily be tested, this is not the case when using Draco.
+Out of the box it is not possible to directly load Draco \ac{blob}s in the JavaScript decoder, so this would need to be implemented first.

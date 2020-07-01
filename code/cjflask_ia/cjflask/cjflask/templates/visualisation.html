@@ -1,0 +1,260 @@
+{% extends "layout.html" %}
+
+
+{% block head %}
+
+<meta charset='utf-8' />
+<title>harp.gl visualisation</title>
+<!-- 
+<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+-->
+<script type="text/javascript" src="{{ url_for('static', filename='etc/socket.io.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='etc/three.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='etc/harp.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='etc/harp-decoders.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='cityjson.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='etc/proj4.js') }}"></script>
+
+
+{% if false %}
+var filename = {{ filename|tojson }};
+{% endif %}
+
+
+<style>
+    body, html { border: 0; margin: 0; padding: 0}
+    #map { height: 100vh; width: 100vw; }
+ </style>
+
+{% endblock %}
+
+
+<!-- Initialise variables from Flask with Jinja-->
+{% block body %}
+
+<canvas id="map"></canvas>
+
+<script>
+// Retrieve variables from Flask if they exist
+{% if filename is defined %}
+var filename = {{ filename|tojson }};
+{% endif %}
+{% if method is defined %}
+var method = {{ method|tojson }};
+{% endif %}
+{% if task is defined %}
+var task = {{ task|tojson }};
+{% endif %}
+{% if field is defined %}
+var field = {{ field|tojson }};
+{% endif %}
+{% if value is defined %}
+var value = {{ value|tojson }};
+{% endif %}
+{% if operation is defined %}
+var operation = {{ operation|tojson }};
+{% endif %}
+{% if cm is defined %}
+cm = {{ cm|tojson }};
+{% endif %}
+{% if start is defined %}
+var start = {{ start|tojson }};
+//console.log(JSON.parse(JSON.stringify(start)));
+{% endif %}
+</script>
+
+
+{% block javascript %}
+
+{% if method == "draco" or method == "dracoreplace" or method == "dracocbor" or method == "dracocborzlib" or method == "dracocborreplace" or method == "dracozlib" or method == "dracocborreplacezlib" %}
+    {% if task == "bufferone" or task == "bufferall" %}
+        <script src='https://unpkg.com/@turf/turf/turf.min.js'></script>
+    {% endif %}
+    {% if task == "editgeomone" or task == "editgeomall" %}
+        <script type="text/javascript" src="{{ url_for('static', filename='etc/draco_encoder.js') }}"></script>
+    {% endif %}
+
+    <script type="text/javascript" src="{{ url_for('static', filename='etc/draco_decoder.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='harpgl_draco.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='cjio.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='DRACOLoader.js') }}"></script>
+
+    {% if method == "dracozlib" %}
+        <script type="text/javascript" src="{{ url_for('static', filename='etc/pako.min.js') }}"></script>
+    {% endif %}
+
+{% endif %}
+
+{% if method == "dracocbor" or method == "dracocborreplace" or method == "dracocborzlib" or method == "dracocborreplacezlib" %}
+    <script type="text/javascript" src="{{ url_for('static', filename='etc/cbor.js') }}"></script>
+{% endif %}
+
+{% if method == "dracocborzlib" or method == "dracocborreplacezlib" %}
+    <script type="text/javascript" src="{{ url_for('static', filename='etc/pako.min.js') }}"></script>
+{% endif %}
+
+{% if method == "originalreplace" or method == "originalreplacezlib" %}
+    <script type="text/javascript" src="{{ url_for('static', filename='etc/functions.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='etc/jquery.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='etc/earcut.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='harpgl_cityjson.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='etc/cbor.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='cjio.js') }}"></script>
+
+    {% if task == "bufferone" or task == "bufferall" %}
+    <script src='https://unpkg.com/@turf/turf/turf.min.js'></script>
+    {% endif %}
+
+    {% if method == "originalreplacezlib" %}
+    <script type="text/javascript" src="{{ url_for('static', filename='etc/pako.min.js') }}"></script>
+    {% endif %}
+{% endif %}
+
+{% if method == "original" or method == "originalcbor" or method == "originalzlib" or method == "originalcborreplace" or method == "originalcborreplacehuff" or method == "originalcborreplacezlib" or method == "originalcborzlib" or method == "originalcborsmaz" %}
+    <script type="text/javascript" src="{{ url_for('static', filename='etc/functions.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='etc/jquery.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='etc/earcut.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='harpgl_cityjson.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='etc/cbor.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='cjio.js') }}"></script>
+
+    {% if method == "originalcborreplacehuff" %}
+    <script type="text/javascript" src="{{ url_for('static', filename='etc/huffman-0.9.0.min.js') }}"></script>
+    {% endif %}
+
+    {% if method == "originalcborsmaz" %}
+    <script type="text/javascript" src="{{ url_for('static', filename='etc/smaz.js') }}"></script>
+    {% endif %}
+
+    {% if method == "originalcborreplacezlib" or method == "originalcborzlib" or method == "originalzlib" %}
+    <script type="text/javascript" src="{{ url_for('static', filename='etc/pako.min.js') }}"></script>
+    {% endif %}
+    
+    {% if task == "bufferone" or task == "bufferall" %}
+    <script src='https://unpkg.com/@turf/turf/turf.min.js'></script>
+    {% endif %}
+{% endif %}
+
+{% endblock %}
+
+<script type="text/javascript"
+src="{{ url_for('static', filename='flask_landing.js') }}"></script>
+
+
+<script>
+// To read .txt files from Flask
+function getText(requesturl){
+    var request = new XMLHttpRequest();
+    //request.responseType = "arraybuffer";
+    request.open('GET', requesturl, true);
+    request.send(null);
+    return request.response;
+    }
+
+function makeRequest(url) {
+    return new Promise(function (resolve, reject) {
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', url);
+        xhr.onload = function () {
+            if (this.status >= 200 && this.status < 300) {
+                resolve(xhr.response);
+            } else {
+                reject({
+                    status: this.status,
+                    statusText: xhr.statusText
+                });
+            }
+        };
+        xhr.onerror = function () {
+            reject({
+                status: this.status,
+                statusText: xhr.statusText
+            });
+        };
+        xhr.send();
+    });
+}
+handleMethod();
+
+async function handleMethod(){
+    initViewer();
+    if(method == "draco"){
+        // Check if task name is given as well, because in that case, a different file (with buffer) needs to be downloaded
+        if(typeof task !== "undefined"){
+            if(task == "bufferall" || task == "bufferone"){
+                var requesturl = "http://127.0.0.1:5000/download/" + filename + "/" + method + "/" + task;
+            }
+            else{
+            var requesturl = "http://127.0.0.1:5000/download/" + filename + "/" + method + "/" + task;
+            }
+        }
+        else{
+        var requesturl = "http://127.0.0.1:5000/download/" + filename + "/" + method + "/" + task;
+        }
+        
+        var oReq = new XMLHttpRequest();
+        oReq.open("GET", requesturl, true);
+        oReq.onload = function (oEvent) {
+        var data = oReq.response;
+        processData(data);
+        };
+
+        oReq.send(null);
+    }
+    else if(method == "original"){
+        initViewer();
+
+        var requesturl = "http://127.0.0.1:5000/download/" + filename + "/" + method + "/" + task;
+        let response = await fetch(requesturl)
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            cm = data;
+            processData();
+        })
+        
+    }
+    else if(method == "dracocbor" || method == "dracocborzlib" || method == "dracocborreplace" || method == "originalcborreplace" || method == "originalcbor" || method == "originalcborreplacehuff" || method == "originalcborsmaz"
+            || method == "originalcborreplacezlib" || method == "dracocborreplacezlib" || method == "originalcborzlib" || method == "originalzlib" || method == "dracozlib" || method == "originalreplacezlib" || method == "originalreplacezlib"){
+        // CBOR needs to be downloaded as ArrayBuffer
+        initViewer();
+        var requesturl = "http://127.0.0.1:5000/download/" + filename + "/" + method + "/" + task;
+
+        var oReq = new XMLHttpRequest();
+        oReq.open("GET", requesturl, true);
+        oReq.responseType = "arraybuffer";
+        oReq.onload = function (oEvent) {
+        var data = oReq.response;
+        processData(data);
+        };
+
+        oReq.send(null);
+
+    }
+
+    else if (method == "originalreplace" || method == "dracoreplace"){
+        initViewer();
+
+        if (typeof cm != "undefined"){
+        processData();
+        }
+        else{
+        var requesturl = "http://127.0.0.1:5000/download/" + filename + "/" + method + "/" + task;
+        let response = await fetch(requesturl)
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            processData(data);
+        })
+        }
+    }
+}
+</script>
+
+
+
+<canvas id="markerelement"></canvas>
+
+{% endblock %}

@@ -1,0 +1,6 @@
+{
+	"temppath": "../../files/test/",
+	"cmpath": "../../files/delft.json",
+	"comprout": "../../files/test/compressed.txt",
+	"cmout": "../../files/test/decompress_output.json"
+}

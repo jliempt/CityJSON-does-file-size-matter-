@@ -1,0 +1,623 @@
+
+
+\chapter{Full benchmark results}
+\label{ap:raw}
+
+
+\begin{landscape}
+
+
+
+
+
+
+\begin{longtable}{llllllllll}
+\toprule
+task & method & delft & denhaag & hdb & montreal & newyork & RotterdamLoD1Lod2 & tudnl3d & Zurich\\
+\midrule
+\endfirsthead
+\multicolumn{10}{@{}l}{\textit{(continued)}}\\
+\toprule
+task & method & delft & denhaag & hdb & montreal & newyork & RotterdamLoD1Lod2 & tudnl3d & Zurich\\
+\midrule
+\endhead
+\
+\endfoot
+\bottomrule
+\endlastfoot
+\rowcolor{lightgray}  bufferall & draco & NA & 1.61 & 0.27 & 0.81 & NA & 1.57 & NA & NA\\
+\rowcolor{lightgray}  bufferall & dracocbor & NA & 1.61 & 0.23 & 0.81 & NA & 1.77 & NA & NA\\
+\rowcolor{lightgray}  bufferall & dracocborreplace & NA & 1.54 & 0.12 & 0.82 & NA & 1.56 & NA & NA\\
+\rowcolor{lightgray}  bufferall & dracocborreplacezlib & NA & 1.49 & 0.14 & 0.88 & NA & 1.76 & NA & NA\\
+\rowcolor{lightgray}  bufferall & dracocborzlib & NA & \textcolor{red}{1.65} & \textcolor{green}{0.09} & 0.87 & NA & \textcolor{red}{2.31} & NA & NA\\
+\rowcolor{lightgray}  bufferall & dracoreplace & NA & 1.59 & 0.14 & 0.8 & NA & 1.63 & NA & NA\\
+\rowcolor{lightgray}  bufferall & dracozlib & NA & 1.49 & 0.12 & 0.78 & NA & 1.54 & NA & NA\\
+\rowcolor{lightgray}  bufferall & original & NA & 1 & 1 & \textcolor{red}{1} & NA & 1 & NA & NA\\
+\rowcolor{lightgray}  bufferall & originalcbor & NA & 0.85 & 1.02 & 0.76 & NA & 1.07 & NA & NA\\
+\rowcolor{lightgray}  bufferall & originalcborreplace & NA & 1.16 & 0.78 & 0.7 & NA & 0.71 & NA & NA\\
+\rowcolor{lightgray}  bufferall & originalcborreplacezlib & NA & 1.1 & 0.9 & \textcolor{green}{0.57} & NA & \textcolor{green}{0.61} & NA & NA\\
+\rowcolor{lightgray}  bufferall & originalcborzlib & NA & 0.96 & 0.87 & 0.7 & NA & 0.88 & NA & NA\\
+\rowcolor{lightgray}  bufferall & originalreplace & NA & 1.16 & \textcolor{red}{1.14} & 0.85 & NA & 0.65 & NA & NA\\
+bufferall & originalzlib & NA & \textcolor{green}{0.72} & 0.77 & 0.72 & NA & 0.95 & NA & NA\\
+bufferone & draco & 1.7 & 1.65 & 1.07 & 1.3 & \textcolor{red}{1.11} & \textcolor{red}{1.47} & 0.65 & 1.04\\
+bufferone & dracocbor & 1.69 & 1.71 & 0.95 & \textcolor{red}{1.54} & 0.99 & 1.39 & 0.63 & 0.95\\
+bufferone & dracocborreplace & 1.85 & 1.54 & 0.67 & 1 & 0.63 & 1.45 & 0.57 & 0.63\\
+bufferone & dracocborreplacezlib & 1.75 & 1.48 & 0.63 & 1.15 & 0.62 & 1.38 & 0.51 & 0.63\\
+bufferone & dracocborzlib & \textcolor{red}{2.94} & 1.61 & 0.59 & 1.32 & 0.61 & 1.4 & 0.5 & 0.55\\
+bufferone & dracoreplace & 1.98 & \textcolor{red}{1.82} & 0.71 & 1.05 & 0.43 & 1.32 & 0.43 & 0.44\\
+bufferone & dracozlib & 1.76 & 1.48 & 0.68 & 1.12 & 0.73 & 1.41 & \textcolor{green}{0.23} & 0.68\\
+bufferone & original & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+bufferone & originalcbor & 0.95 & 0.96 & 0.83 & 0.87 & 0.75 & 0.89 & 0.7 & 0.83\\
+bufferone & originalcborreplace & 0.96 & 0.95 & 0.71 & \textcolor{green}{0.68} & 0.58 & 0.73 & 0.78 & 0.74\\
+bufferone & originalcborreplacezlib & 0.98 & 0.98 & 0.75 & 0.68 & 0.55 & 0.75 & 0.75 & 0.71\\
+bufferone & originalcborzlib & 0.87 & 0.85 & \textcolor{green}{0.39} & 0.84 & \textcolor{green}{0.32} & \textcolor{green}{0.68} & 0.43 & \textcolor{green}{0.4}\\
+\rowcolor{lightgray}  bufferone & originalreplace & 1.11 & 1.04 & \textcolor{red}{1.22} & 0.86 & 0.9 & 0.8 & \textcolor{red}{1.22} & \textcolor{red}{1.23}\\
+\rowcolor{lightgray}  bufferone & originalzlib & \textcolor{green}{0.86} & \textcolor{green}{0.8} & 0.51 & 0.71 & 0.39 & 0.82 & 0.5 & 0.46\\
+\rowcolor{lightgray}  editattrall & draco & 0.95 & 0.98 & 0.66 & 0.8 & 0.9 & 1.02 & 0.32 & 0.6\\
+\rowcolor{lightgray}  editattrall & dracocbor & 1.07 & 1.03 & 0.57 & 0.96 & 0.52 & 0.92 & 0.29 & 0.43\\
+\rowcolor{lightgray}  editattrall & dracocborreplace & 0.94 & 0.74 & \textcolor{green}{0.24} & 0.66 & 0.12 & 0.9 & \textcolor{green}{0.16} & \textcolor{green}{0.09}\\
+\rowcolor{lightgray}  editattrall & dracocborreplacezlib & 1.12 & 0.77 & 0.25 & 0.74 & \textcolor{green}{0.09} & 1.14 & 0.17 & 0.17\\
+\rowcolor{lightgray}  editattrall & dracocborzlib & 1.14 & \textcolor{green}{0.68} & 0.28 & 1.04 & 0.24 & 1.14 & 0.16 & 0.17\\
+\rowcolor{lightgray}  editattrall & dracoreplace & \textcolor{green}{0.93} & 0.81 & 0.56 & 0.69 & 0.53 & 1 & 0.29 & 0.12\\
+\rowcolor{lightgray}  editattrall & dracozlib & 1.08 & 0.97 & 0.36 & 0.93 & 0.34 & 1.02 & 0.25 & 0.52\\
+\rowcolor{lightgray}  editattrall & original & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+\rowcolor{lightgray}  editattrall & originalcbor & 1.01 & 0.88 & 0.7 & 0.71 & 0.73 & 0.69 & 0.65 & 0.79\\
+\rowcolor{lightgray}  editattrall & originalcborreplace & 1.23 & 0.73 & 0.82 & 0.89 & 1.13 & 0.98 & 1.39 & NA\\
+\rowcolor{lightgray}  editattrall & originalcborreplacezlib & \textcolor{red}{1.56} & \textcolor{red}{1.67} & 1.27 & \textcolor{green}{0.58} & 0.89 & \textcolor{red}{1.82} & \textcolor{red}{1.75} & \textcolor{red}{2.4}\\
+editattrall & originalcborzlib & 1.19 & 0.77 & 0.26 & 0.59 & 0.25 & \textcolor{green}{0.68} & 0.34 & 0.48\\
+editattrall & originalreplace & 1.28 & 0.8 & \textcolor{red}{1.39} & 0.63 & \textcolor{red}{1.34} & 0.95 & 1.65 & 1.59\\
+editattrall & originalzlib & 1.11 & 0.74 & 0.34 & \textcolor{red}{1.27} & 0.32 & 0.68 & 0.57 & 0.37\\
+editattrone & draco & 1.15 & 1.22 & 0.71 & 0.9 & 0.82 & 1.16 & 0.35 & 0.6\\
+editattrone & dracocbor & 1.44 & 1.27 & 0.64 & 1 & 0.54 & 1.05 & 0.27 & 0.41\\
+editattrone & dracocborreplace & 1.28 & 0.88 & \textcolor{green}{0.24} & 1.06 & 0.1 & 0.97 & 0.17 & 0.08\\
+editattrone & dracocborreplacezlib & 1.32 & 1.01 & 0.27 & 0.68 & 0.09 & 1.32 & 0.17 & 0.11\\
+editattrone & dracocborzlib & 1.47 & 1.68 & 0.4 & 1.05 & 0.55 & 1.17 & 0.2 & 0.27\\
+editattrone & dracoreplace & \textcolor{green}{0.81} & \textcolor{green}{0.62} & 0.55 & \textcolor{green}{0.47} & \textcolor{green}{0.07} & \textcolor{green}{0.54} & \textcolor{green}{0.12} & 0.08\\
+editattrone & dracozlib & 1.6 & 1.16 & 0.38 & 1.04 & 0.34 & 1.18 & 0.26 & 0.44\\
+editattrone & original & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+editattrone & originalcbor & 0.95 & 0.98 & 0.8 & 0.75 & 0.82 & 0.83 & 0.76 & \textcolor{red}{1.31}\\
+editattrone & originalcborreplace & 1.56 & 0.87 & 0.84 & 1.13 & 1 & 1.17 & 1.5 & 1.03\\
+\rowcolor{lightgray}  editattrone & originalcborreplacezlib & \textcolor{red}{2.32} & 1.66 & 1.39 & 0.66 & 0.73 & \textcolor{red}{2.25} & \textcolor{red}{2.37} & 0.88\\
+\rowcolor{lightgray}  editattrone & originalcborzlib & 1.95 & \textcolor{red}{1.82} & 0.56 & 0.94 & 0.6 & 0.93 & 0.95 & NA\\
+\rowcolor{lightgray}  editattrone & originalreplace & 1.64 & 0.94 & \textcolor{red}{1.44} & 0.71 & \textcolor{red}{1.22} & 1.01 & 1.64 & \textcolor{green}{0.06}\\
+\rowcolor{lightgray}  editattrone & originalzlib & 1.73 & 1.02 & 0.73 & \textcolor{red}{1.99} & 0.65 & 1.99 & 1.22 & NA\\
+\rowcolor{lightgray}  editgeomall & draco & \textcolor{red}{1.77} & \textcolor{red}{1.04} & 0.34 & 0.45 & 0.32 & 1.27 & 0.19 & 0.36\\
+\rowcolor{lightgray}  editgeomall & dracocbor & 1.56 & 1.03 & 0.3 & 0.45 & 0.29 & 1.22 & 0.19 & 0.33\\
+\rowcolor{lightgray}  editgeomall & dracocborreplace & 1.5 & 0.97 & 0.21 & 0.37 & 0.19 & 1.11 & 0.17 & 0.24\\
+\rowcolor{lightgray}  editgeomall & dracocborreplacezlib & 1.51 & 0.96 & 0.21 & 0.37 & 0.19 & 1.14 & 0.16 & 0.24\\
+\rowcolor{lightgray}  editgeomall & dracocborzlib & 1.61 & 0.95 & 0.18 & 0.4 & 0.18 & 1.18 & \textcolor{green}{0.15} & \textcolor{green}{0.07}\\
+\rowcolor{lightgray}  editgeomall & dracoreplace & 1.51 & 0.94 & 0.23 & 0.35 & \textcolor{green}{0.15} & \textcolor{red}{1.53} & 0.19 & 0.2\\
+\rowcolor{lightgray}  editgeomall & dracozlib & 1.55 & 0.95 & 0.21 & 0.4 & 0.21 & 1.01 & 0.16 & 0.25\\
+\rowcolor{lightgray}  editgeomall & original & 1 & 1 & \textcolor{red}{1} & \textcolor{red}{1} & \textcolor{red}{1} & 1 & \textcolor{red}{1} & \textcolor{red}{1}\\
+\rowcolor{lightgray}  editgeomall & originalcbor & 1.13 & 0.68 & 0.24 & 0.24 & 0.2 & \textcolor{green}{0.6} & 0.19 & 0.32\\
+editgeomall & originalcborreplace & \textcolor{green}{0.7} & \textcolor{green}{0.49} & 0.24 & 0.33 & 0.23 & 0.81 & 0.38 & 0.32\\
+editgeomall & originalcborreplacezlib & 1.35 & 1.02 & 0.25 & \textcolor{green}{0.22} & 0.19 & 1.08 & 0.71 & NA\\
+editgeomall & originalcborzlib & 0.87 & 0.57 & \textcolor{green}{0.17} & 0.31 & 0.15 & 0.68 & 0.24 & NA\\
+editgeomall & originalreplace & 0.75 & 0.71 & 0.36 & 0.33 & 0.29 & 0.79 & 0.45 & NA\\
+editgeomall & originalzlib & 0.87 & 0.6 & 0.22 & 0.51 & 0.16 & 0.71 & 0.39 & 0.28\\
+editgeomone & draco & 1.61 & \textcolor{red}{1.78} & 1.02 & 1.17 & 1.14 & 1.4 & 0.66 & 0.99\\
+editgeomone & dracocbor & 1.67 & 1.58 & 0.9 & 1.11 & 1.01 & 1.32 & 0.64 & 0.89\\
+editgeomone & dracocborreplace & 1.6 & 1.39 & 0.6 & 0.89 & 0.62 & 1.18 & 0.55 & 0.6\\
+editgeomone & dracocborreplacezlib & 1.64 & 1.42 & 0.61 & 0.89 & 0.61 & 1.21 & 0.53 & 0.58\\
+editgeomone & dracocborzlib & 1.63 & 1.45 & \textcolor{green}{0.49} & 1.02 & 0.55 & 1.23 & \textcolor{green}{0.48} & 0.57\\
+editgeomone & dracoreplace & 1.62 & 1.38 & 0.66 & 0.85 & \textcolor{green}{0.44} & 1.4 & 0.58 & \textcolor{green}{0.45}\\
+editgeomone & dracozlib & 1.63 & 1.43 & 0.57 & 1.02 & 0.67 & 1.26 & 0.53 & 0.64\\
+editgeomone & original & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+\rowcolor{lightgray}  editgeomone & originalcbor & 0.95 & 1.22 & 0.8 & 0.75 & 0.81 & \textcolor{green}{0.78} & 0.74 & 1.04\\
+\rowcolor{lightgray}  editgeomone & originalcborreplace & \textcolor{green}{0.9} & \textcolor{green}{0.88} & 0.81 & 0.93 & 0.86 & 1.08 & 1.45 & 1.25\\
+\rowcolor{lightgray}  editgeomone & originalcborreplacezlib & \textcolor{red}{2.13} & 1.55 & \textcolor{red}{1.49} & \textcolor{green}{0.66} & 0.78 & \textcolor{red}{2.61} & 1.99 & NA\\
+\rowcolor{lightgray}  editgeomone & originalcborzlib & 1.19 & 1.03 & 0.57 & 0.92 & 0.59 & 0.89 & 0.94 & NA\\
+\rowcolor{lightgray}  editgeomone & originalreplace & 0.97 & 0.98 & 1.21 & 0.92 & \textcolor{red}{1.22} & 1.13 & 1.82 & \textcolor{red}{1.32}\\
+\rowcolor{lightgray}  editgeomone & originalzlib & 1.12 & 1 & 0.7 & \textcolor{red}{2.11} & 0.65 & 0.9 & \textcolor{red}{3.56} & 0.85\\
+\rowcolor{lightgray}  queryall & draco & 0.94 & 1.12 & 0.75 & 0.94 & 0.8 & 0.93 & 0.37 & 0.67\\
+\rowcolor{lightgray}  queryall & dracocbor & 0.95 & 1.1 & 0.63 & 0.84 & 0.67 & 0.86 & 0.35 & 0.58\\
+\rowcolor{lightgray}  queryall & dracocborreplace & 0.9 & 0.92 & 0.34 & 0.63 & 0.28 & 0.74 & 0.26 & 0.28\\
+\rowcolor{lightgray}  queryall & dracocborreplacezlib & 0.91 & 0.94 & 0.34 & 0.64 & 0.28 & 0.74 & 0.25 & 0.27\\
+\rowcolor{lightgray}  queryall & dracocborzlib & 0.93 & 0.95 & \textcolor{green}{0.23} & 0.77 & 0.2 & 0.77 & 0.19 & 0.22\\
+\rowcolor{lightgray}  queryall & dracoreplace & 0.89 & 0.9 & 0.39 & \textcolor{green}{0.57} & \textcolor{green}{0.1} & 0.68 & \textcolor{green}{0.17} & \textcolor{green}{0.13}\\
+\rowcolor{lightgray}  queryall & dracozlib & 0.91 & 0.96 & 0.31 & 0.77 & 0.33 & 0.81 & 0.24 & 0.32\\
+queryall & original & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+queryall & originalcbor & \textcolor{green}{0.77} & 1.11 & 0.72 & 0.74 & 0.74 & 0.68 & 0.67 & 0.83\\
+queryall & originalcborreplace & 0.94 & 0.79 & 0.66 & 0.76 & 0.67 & 0.93 & 1 & 0.84\\
+queryall & originalcborreplacezlib & \textcolor{red}{1.22} & \textcolor{red}{1.31} & 1.23 & 0.6 & 0.59 & \textcolor{red}{1.43} & 0.98 & 0.98\\
+queryall & originalcborzlib & 1.13 & \textcolor{green}{0.77} & 0.28 & 0.65 & 0.27 & \textcolor{green}{0.6} & 0.35 & 0.45\\
+queryall & originalreplace & 1.1 & 0.94 & \textcolor{red}{1.24} & 0.7 & \textcolor{red}{1.03} & 0.92 & \textcolor{red}{1.53} & \textcolor{red}{1.33}\\
+queryall & originalzlib & 0.77 & 0.8 & 0.36 & \textcolor{red}{1.13} & 0.32 & 0.63 & 0.57 & 0.38\\
+queryone & draco & \textcolor{red}{1.33} & 1.42 & 1.03 & 1.06 & \textcolor{red}{1.13} & \textcolor{red}{1.24} & 0.66 & 0.98\\
+queryone & dracocbor & 1.28 & 1.43 & 0.9 & 0.98 & 0.99 & 1.19 & 0.64 & 0.88\\
+queryone & dracocborreplace & 1.21 & 1.24 & 0.6 & 0.8 & 0.61 & 1.06 & 0.55 & 0.59\\
+queryone & dracocborreplacezlib & 1.22 & 1.25 & 0.6 & 0.78 & 0.6 & 1.05 & 0.54 & 0.58\\
+queryone & dracocborzlib & 1.26 & 1.28 & 0.48 & 0.9 & 0.53 & 1.09 & 0.48 & 0.59\\
+queryone & dracoreplace & 1.23 & 1.23 & 0.66 & 0.76 & 0.43 & 0.99 & 0.56 & 0.49\\
+\rowcolor{lightgray}  queryone & dracozlib & 1.26 & 1.28 & 0.58 & 0.91 & 0.66 & 1.12 & 0.54 & 0.63\\
+\rowcolor{lightgray}  queryone & original & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+\rowcolor{lightgray}  queryone & originalcbor & \textcolor{green}{0.76} & 1.11 & 0.74 & 0.68 & 0.74 & 0.7 & 0.69 & 0.82\\
+\rowcolor{lightgray}  queryone & originalcborreplace & 0.84 & 0.8 & 0.68 & 0.7 & 0.66 & 0.91 & 1.01 & 0.81\\
+\rowcolor{lightgray}  queryone & originalcborreplacezlib & 1.23 & \textcolor{red}{1.55} & \textcolor{red}{1.34} & \textcolor{green}{0.56} & 0.6 & 0.91 & 0.99 & 0.99\\
+\rowcolor{lightgray}  queryone & originalcborzlib & 0.81 & \textcolor{green}{0.76} & \textcolor{green}{0.29} & 0.61 & \textcolor{green}{0.26} & \textcolor{green}{0.63} & \textcolor{green}{0.35} & 0.5\\
+\rowcolor{lightgray}  queryone & originalreplace & 0.83 & 0.93 & 1.17 & 0.65 & 1.08 & 0.95 & \textcolor{red}{1.57} & \textcolor{red}{1.32}\\
+\rowcolor{lightgray}  queryone & originalzlib & 0.78 & 0.79 & 0.35 & \textcolor{red}{1.16} & 0.32 & 0.69 & 0.59 & \textcolor{green}{0.38}\\
+\rowcolor{lightgray}  visualise & draco & 1.83 & 1.74 & 0.86 & 1 & 1.01 & 1.54 & 0.31 & 0.86\\
+\rowcolor{lightgray}  visualise & dracocbor & 1.96 & 1.29 & 0.78 & 0.92 & 0.75 & 1.35 & 0.44 & 0.59\\
+\rowcolor{lightgray}  visualise & dracocborreplace & 1.99 & 1.19 & 0.48 & 1.19 & 0.55 & 1.67 & 0.27 & \textcolor{green}{0.06}\\
+\rowcolor{lightgray}  visualise & dracocborreplacezlib & 1.98 & 1.31 & 0.47 & 1.2 & 0.41 & 1.96 & 0.28 & 0.44\\
+\rowcolor{lightgray}  visualise & dracocborzlib & 2.02 & \textcolor{red}{2.05} & 0.61 & 0.8 & 0.79 & \textcolor{red}{2.49} & 0.31 & 0.42\\
+visualise & dracoreplace & 1.5 & 1.2 & 0.71 & 1.16 & 0.53 & 2.46 & 0.32 & 0.37\\
+visualise & dracozlib & \textcolor{red}{2.12} & 1.3 & 0.47 & 0.92 & 0.56 & 1.14 & \textcolor{green}{0.24} & 0.3\\
+visualise & original & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+visualise & originalcbor & \textcolor{green}{0.86} & 1.1 & 0.68 & 0.68 & 0.76 & 0.69 & 0.61 & 0.99\\
+visualise & originalcborreplace & 0.92 & \textcolor{green}{0.79} & 0.63 & 0.84 & 0.84 & 1 & 1.16 & 0.94\\
+visualise & originalcborreplacezlib & 0.98 & 1.52 & 1.01 & \textcolor{green}{0.6} & 0.64 & 2.37 & 1.23 & \textcolor{red}{1.65}\\
+visualise & originalcborzlib & 1.67 & 0.8 & \textcolor{green}{0.33} & 0.64 & \textcolor{green}{0.36} & \textcolor{green}{0.66} & 0.54 & 0.46\\
+visualise & originalreplace & 1.52 & 0.95 & \textcolor{red}{1.25} & 0.68 & \textcolor{red}{1.19} & 0.98 & \textcolor{red}{1.24} & 1.58\\
+visualise & originalzlib & 1.41 & 0.83 & 0.4 & \textcolor{red}{1.33} & 0.62 & 0.7 & 0.56 & 0.63\\*
+\caption{Full benchmark results of compression in advance, datasets with attributes}
+\label{tab:fullresultsiaattr}
+\end{longtable}
+
+
+
+
+\end{landscape}
+
+
+
+
+
+
+\begin{landscape}
+
+\begin{longtable}{llllllllll}
+\toprule
+task & method & delft & denhaag & hdb & montreal & newyork & RotterdamLoD1Lod2 & tudnl3d & Zurich\\
+\midrule
+\endfirsthead
+\multicolumn{10}{@{}l}{\textit{(continued)}}\\
+\toprule
+task & method & delft & denhaag & hdb & montreal & newyork & RotterdamLoD1Lod2 & tudnl3d & Zurich\\
+\midrule
+\endhead
+\
+\endfoot
+\bottomrule
+\endlastfoot
+\rowcolor{lightgray}  bufferall & draco & NA & 1.71 & 0.26 & 0.78 & NA & 1.54 & NA & NA\\
+\rowcolor{lightgray}  bufferall & dracocbor & NA & \textcolor{red}{1.81} & 0.22 & 0.81 & NA & 1.86 & NA & NA\\
+\rowcolor{lightgray}  bufferall & dracocborreplace & NA & 1.55 & 0.32 & 0.73 & NA & 1.47 & NA & NA\\
+\rowcolor{lightgray}  bufferall & dracocborreplacezlib & NA & 1.57 & 0.13 & 0.93 & NA & 1.94 & NA & NA\\
+\rowcolor{lightgray}  bufferall & dracocborzlib & NA & 1.74 & \textcolor{green}{0.1} & 0.86 & NA & 2.84 & NA & NA\\
+\rowcolor{lightgray}  bufferall & dracoreplace & NA & 1.74 & 0.13 & 0.77 & NA & 1.53 & NA & NA\\
+\rowcolor{lightgray}  bufferall & dracozlib & NA & 1.58 & 0.12 & 0.91 & NA & 1.64 & NA & NA\\
+\rowcolor{lightgray}  bufferall & original & NA & 1 & 1 & 1 & NA & 1 & NA & NA\\
+\rowcolor{lightgray}  bufferall & originalcbor & NA & 0.83 & 0.88 & 0.74 & NA & 1.14 & NA & NA\\
+\rowcolor{lightgray}  bufferall & originalcborreplace & NA & 1.14 & 0.78 & 0.67 & NA & 0.69 & NA & NA\\
+\rowcolor{lightgray}  bufferall & originalcborreplacezlib & NA & 1.23 & 0.85 & \textcolor{red}{2.43} & NA & \textcolor{red}{3.33} & NA & NA\\
+\rowcolor{lightgray}  bufferall & originalcborzlib & NA & 0.97 & 0.8 & \textcolor{green}{0.62} & NA & 0.92 & NA & NA\\
+\rowcolor{lightgray}  bufferall & originalreplace & NA & 1.25 & \textcolor{red}{1.14} & 1.55 & NA & \textcolor{green}{0.63} & NA & NA\\
+bufferall & originalzlib & NA & \textcolor{green}{0.82} & 0.7 & 0.63 & NA & 1.05 & NA & NA\\
+bufferone & draco & 1.91 & 1.7 & 1.04 & 1.42 & \textcolor{red}{1.01} & 1.42 & 1.53 & 0.99\\
+bufferone & dracocbor & 1.8 & 1.9 & 0.82 & \textcolor{red}{1.66} & 0.9 & 1.37 & 1.58 & 0.99\\
+bufferone & dracocborreplace & 2.01 & 1.55 & 0.59 & 1 & 0.58 & 1.47 & 1.39 & 0.59\\
+bufferone & dracocborreplacezlib & 1.92 & 1.49 & 0.63 & 1.17 & 0.54 & 1.33 & 1.44 & 0.6\\
+bufferone & dracocborzlib & \textcolor{red}{3.21} & 1.61 & 0.57 & 1.34 & 0.51 & \textcolor{red}{1.53} & 1.15 & 0.5\\
+bufferone & dracoreplace & 2.04 & \textcolor{red}{2.16} & 0.73 & 1.17 & 0.41 & 1.27 & \textcolor{green}{0.93} & 0.45\\
+bufferone & dracozlib & 1.85 & 1.6 & 0.65 & 1.14 & 0.6 & 1.32 & 1.25 & 0.6\\
+bufferone & original & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+bufferone & originalcbor & 1.08 & 0.94 & 0.76 & 0.87 & 0.67 & 0.83 & 1.6 & 0.84\\
+bufferone & originalcborreplace & 1 & 1.06 & 0.71 & \textcolor{green}{0.65} & 0.49 & 0.77 & 1.66 & 0.71\\
+bufferone & originalcborreplacezlib & 0.96 & 1.02 & 0.65 & 0.66 & 0.5 & 0.82 & 1.85 & 0.65\\
+bufferone & originalcborzlib & \textcolor{green}{0.9} & \textcolor{green}{0.82} & \textcolor{green}{0.46} & 0.93 & \textcolor{green}{0.28} & \textcolor{green}{0.76} & 1.01 & \textcolor{green}{0.41}\\
+\rowcolor{lightgray}  bufferone & originalreplace & 1.42 & 1.09 & 1.12 & 0.87 & 0.81 & 0.76 & \textcolor{red}{2.66} & \textcolor{red}{1.14}\\
+\rowcolor{lightgray}  bufferone & originalzlib & 0.93 & 0.9 & \textcolor{red}{1.58} & 0.68 & 0.36 & 0.81 & 1.26 & 0.48\\
+\rowcolor{lightgray}  editattrall & draco & 1 & 0.89 & 0.24 & 0.88 & 0.55 & 0.93 & 0.13 & 0.41\\
+\rowcolor{lightgray}  editattrall & dracocbor & NA & NA & NA & NA & NA & NA & NA & NA\\
+\rowcolor{lightgray}  editattrall & dracocborreplace & 0.96 & 0.8 & 0.43 & 0.67 & 0.29 & 0.77 & 0.15 & \textcolor{green}{0.08}\\
+\rowcolor{lightgray}  editattrall & dracocborreplacezlib & 0.97 & 0.83 & 0.24 & \textcolor{green}{0.59} & \textcolor{green}{0.08} & 0.77 & \textcolor{green}{0.11} & 0.09\\
+\rowcolor{lightgray}  editattrall & dracocborzlib & 0.95 & 0.81 & \textcolor{green}{0.23} & 0.76 & 0.13 & 0.82 & 0.11 & 0.17\\
+\rowcolor{lightgray}  editattrall & dracoreplace & 1.1 & 0.82 & 0.43 & 0.63 & 0.29 & 0.79 & 0.19 & 0.12\\
+\rowcolor{lightgray}  editattrall & dracozlib & \textcolor{red}{1.13} & 0.95 & 0.25 & \textcolor{red}{1.01} & 0.23 & 1.01 & 0.12 & 0.22\\
+\rowcolor{lightgray}  editattrall & original & 1 & \textcolor{red}{1} & 1 & 1 & 1 & 1 & 1 & \textcolor{red}{1}\\
+\rowcolor{lightgray}  editattrall & originalcbor & 1.12 & 0.94 & 0.69 & 0.81 & 0.73 & \textcolor{red}{1.04} & 0.7 & 0.72\\
+\rowcolor{lightgray}  editattrall & originalcborreplace & 1.06 & 0.84 & 1.35 & 0.63 & 0.75 & \textcolor{green}{0.72} & 1.14 & NA\\
+\rowcolor{lightgray}  editattrall & originalcborreplacezlib & \textcolor{green}{0.83} & \textcolor{green}{0.77} & 1.29 & 0.62 & 0.75 & 0.75 & 1.13 & NA\\
+editattrall & originalcborzlib & 1.06 & 0.92 & 0.47 & 0.76 & 0.29 & 0.74 & 0.41 & 0.33\\
+editattrall & originalreplace & 0.91 & 0.83 & \textcolor{red}{1.83} & 0.73 & \textcolor{red}{1.03} & 0.77 & \textcolor{red}{1.81} & NA\\
+editattrall & originalzlib & 1.03 & 0.8 & 0.49 & 0.72 & 0.34 & 0.75 & 0.47 & 0.51\\
+editattrone & draco & 1.21 & 1.08 & \textcolor{green}{0.26} & 0.94 & 0.56 & 0.96 & 0.13 & 0.41\\
+editattrone & dracocbor & NA & NA & NA & NA & NA & NA & NA & NA\\
+editattrone & dracocborreplace & 1.23 & \textcolor{green}{0.96} & 0.32 & 0.71 & 0.1 & 0.8 & 0.12 & 0.09\\
+editattrone & dracocborreplacezlib & 1.23 & 1 & 0.26 & \textcolor{green}{0.64} & \textcolor{green}{0.08} & 0.8 & \textcolor{green}{0.11} & \textcolor{green}{0.08}\\
+editattrone & dracocborzlib & 1.24 & 1.03 & 0.26 & 0.86 & 0.17 & 0.91 & 0.12 & 0.23\\
+editattrone & dracoreplace & \textcolor{green}{0.78} & 1 & 0.28 & 0.67 & 0.1 & 0.87 & 0.14 & 0.12\\
+editattrone & dracozlib & \textcolor{red}{1.58} & 1.16 & 0.27 & 1.06 & 0.23 & 1.05 & 0.12 & 0.22\\
+editattrone & original & 1 & 1 & 1 & 1 & \textcolor{red}{1} & 1 & 1 & 1\\
+editattrone & originalcbor & 1.04 & 1.04 & 0.85 & 1.06 & 0.81 & \textcolor{red}{1.12} & \textcolor{red}{2.02} & 0.8\\
+editattrone & originalcborreplace & 1.22 & 1 & 1.37 & 0.7 & 0.67 & \textcolor{green}{0.76} & 1.11 & 0.91\\
+\rowcolor{lightgray}  editattrone & originalcborreplacezlib & 1.07 & 0.96 & 1.31 & 0.69 & 0.66 & 0.77 & 1.14 & 0.89\\
+\rowcolor{lightgray}  editattrone & originalcborzlib & 1.47 & \textcolor{red}{1.42} & 0.93 & 1.08 & 0.62 & 0.95 & 1.09 & 0.73\\
+\rowcolor{lightgray}  editattrone & originalreplace & 1.25 & 1.02 & \textcolor{red}{1.89} & 0.78 & 0.96 & 0.8 & 1.67 & \textcolor{red}{1.65}\\
+\rowcolor{lightgray}  editattrone & originalzlib & 1.2 & 1.06 & 1.05 & \textcolor{red}{1.13} & 0.64 & 0.94 & 1.08 & 0.75\\
+\rowcolor{lightgray}  editgeomall & draco & 2.45 & 2.08 & 1.16 & 1.63 & \textcolor{red}{1.11} & 1.94 & 0.67 & 0.41\\
+\rowcolor{lightgray}  editgeomall & dracocbor & NA & NA & NA & NA & NA & NA & NA & NA\\
+\rowcolor{lightgray}  editgeomall & dracocborreplace & 2.48 & 1.96 & 1.8 & \textcolor{red}{2.09} & 0.91 & 1.8 & 0.7 & 0.6\\
+\rowcolor{lightgray}  editgeomall & dracocborreplacezlib & 2.55 & 1.99 & 1.17 & 1.44 & 0.65 & 1.83 & 0.68 & 0.6\\
+\rowcolor{lightgray}  editgeomall & dracocborzlib & 2.41 & 1.92 & 1.15 & 1.46 & 0.7 & 1.77 & 0.8 & 0.15\\
+\rowcolor{lightgray}  editgeomall & dracoreplace & \textcolor{red}{3.95} & \textcolor{red}{3} & 1.7 & 1.71 & 0.91 & \textcolor{red}{2.57} & 0.99 & 0.63\\
+\rowcolor{lightgray}  editgeomall & dracozlib & 3.36 & 2.01 & 1.18 & 1.51 & 0.71 & 1.84 & \textcolor{green}{0.65} & \textcolor{green}{0.13}\\
+\rowcolor{lightgray}  editgeomall & original & \textcolor{green}{1} & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+\rowcolor{lightgray}  editgeomall & originalcbor & NA & NA & NA & NA & NA & NA & NA & NA\\
+editgeomall & originalcborreplace & 1.04 & 0.98 & 1.32 & 0.67 & 0.67 & \textcolor{green}{0.79} & 1.15 & 0.89\\
+editgeomall & originalcborreplacezlib & 1.05 & \textcolor{green}{0.92} & 1.36 & \textcolor{green}{0.66} & 0.68 & 0.81 & 1.15 & 0.89\\
+editgeomall & originalcborzlib & 1.82 & 1.43 & \textcolor{green}{0.86} & 1.1 & \textcolor{green}{0.61} & 1.02 & 1.05 & 0.72\\
+editgeomall & originalreplace & 1.15 & 0.96 & \textcolor{red}{1.86} & 0.78 & 0.95 & 0.91 & \textcolor{red}{1.72} & \textcolor{red}{1.21}\\
+editgeomall & originalzlib & 1.22 & 1.05 & 1.04 & 1.15 & 0.65 & 0.97 & 1.09 & 0.82\\
+editgeomone & draco & 1.86 & 1.65 & 0.86 & 1.31 & 0.91 & 1.48 & 0.48 & 0.72\\
+editgeomone & dracocbor & NA & NA & NA & NA & NA & NA & NA & NA\\
+editgeomone & dracocborreplace & 2.05 & 1.58 & 1.14 & 1.4 & 0.59 & 1.27 & 0.48 & 0.4\\
+editgeomone & dracocborreplacezlib & 1.99 & 1.64 & 0.88 & 1.04 & \textcolor{green}{0.44} & 1.32 & 0.49 & 0.4\\
+editgeomone & dracocborzlib & 2.05 & 1.67 & 0.83 & 1.23 & 0.5 & 1.38 & 0.66 & \textcolor{green}{0.13}\\
+editgeomone & dracoreplace & \textcolor{red}{3.38} & \textcolor{red}{1.97} & 1.08 & \textcolor{red}{1.48} & 0.56 & \textcolor{red}{1.67} & 0.66 & 0.43\\
+editgeomone & dracozlib & 2.11 & 1.61 & 0.85 & 1.19 & 0.51 & 1.38 & \textcolor{green}{0.46} & 0.45\\
+editgeomone & original & \textcolor{green}{1} & 1 & 1 & 1 & \textcolor{red}{1} & 1 & 1 & 1\\
+\rowcolor{lightgray}  editgeomone & originalcbor & 1.12 & 1.03 & \textcolor{green}{0.82} & 1.01 & 0.93 & 1.11 & 0.75 & 1.12\\
+\rowcolor{lightgray}  editgeomone & originalcborreplace & 1.11 & 1.04 & 1.32 & \textcolor{green}{0.67} & 0.67 & \textcolor{green}{0.74} & 1.11 & 0.89\\
+\rowcolor{lightgray}  editgeomone & originalcborreplacezlib & 1.1 & \textcolor{green}{0.94} & 1.32 & 0.69 & 0.67 & 0.74 & 1.1 & 0.89\\
+\rowcolor{lightgray}  editgeomone & originalcborzlib & 1.61 & 1.53 & 0.89 & 1.14 & 0.61 & 0.96 & 1.03 & 0.71\\
+\rowcolor{lightgray}  editgeomone & originalreplace & 1.14 & 0.99 & \textcolor{red}{1.86} & 0.78 & 0.95 & 0.91 & \textcolor{red}{2.65} & \textcolor{red}{1.22}\\
+\rowcolor{lightgray}  editgeomone & originalzlib & 1.26 & 1.05 & 1 & 1.14 & 0.64 & 0.92 & 1.04 & 1.08\\
+\rowcolor{lightgray}  queryall & draco & 1.2 & 1.06 & 0.26 & 0.94 & 0.56 & 1.04 & 0.13 & 0.41\\
+\rowcolor{lightgray}  queryall & dracocbor & NA & NA & NA & NA & NA & NA & NA & NA\\
+\rowcolor{lightgray}  queryall & dracocborreplace & 1.2 & 0.92 & 0.32 & 0.7 & 0.09 & 0.83 & 0.11 & 0.08\\
+\rowcolor{lightgray}  queryall & dracocborreplacezlib & 1.23 & 0.96 & \textcolor{green}{0.25} & 0.64 & \textcolor{green}{0.08} & 0.85 & 0.11 & \textcolor{green}{0.07}\\
+\rowcolor{lightgray}  queryall & dracocborzlib & 1.23 & 0.97 & 0.25 & 0.82 & 0.13 & 0.94 & \textcolor{green}{0.1} & 0.16\\
+\rowcolor{lightgray}  queryall & dracoreplace & 1.29 & \textcolor{red}{1.07} & 0.3 & 0.66 & 0.1 & 0.9 & 0.13 & 0.13\\
+\rowcolor{lightgray}  queryall & dracozlib & \textcolor{red}{1.36} & 0.98 & 0.25 & 0.83 & 0.15 & 0.92 & 0.1 & 0.13\\
+queryall & original & 1 & 1 & 1 & \textcolor{red}{1} & \textcolor{red}{1} & 1 & 1 & 1\\
+queryall & originalcbor & 1.18 & 1.05 & 0.86 & 0.91 & 0.84 & \textcolor{red}{1.09} & 0.68 & 0.73\\
+queryall & originalcborreplace & 1.01 & 0.94 & 1.14 & \textcolor{green}{0.6} & 0.54 & \textcolor{green}{0.75} & 0.84 & 0.67\\
+queryall & originalcborreplacezlib & \textcolor{green}{0.99} & 0.85 & 1.12 & 0.6 & 0.54 & 0.76 & 0.84 & 0.68\\
+queryall & originalcborzlib & 1.36 & 0.89 & 0.49 & 0.77 & 0.29 & 0.81 & 0.42 & 0.33\\
+queryall & originalreplace & 1.26 & 0.96 & \textcolor{red}{1.77} & 0.75 & 0.91 & 0.87 & \textcolor{red}{1.48} & \textcolor{red}{1.16}\\
+queryall & originalzlib & 1.03 & \textcolor{green}{0.82} & 0.53 & 0.76 & 0.34 & 0.76 & 0.47 & 0.43\\
+queryone & draco & 1.76 & 1.53 & 0.82 & 1.22 & 0.9 & 1.53 & 0.48 & 0.71\\
+queryone & dracocbor & NA & NA & NA & NA & NA & NA & NA & NA\\
+queryone & dracocborreplace & 1.81 & 1.43 & 1.26 & 1.29 & 0.57 & 1.34 & 0.48 & 0.4\\
+queryone & dracocborreplacezlib & 1.8 & 1.49 & 0.83 & 0.97 & 0.43 & 1.43 & 0.47 & 0.39\\
+queryone & dracocborzlib & 1.78 & 1.42 & 0.8 & 1.12 & 0.48 & 1.45 & 0.53 & 0.52\\
+queryone & dracoreplace & \textcolor{red}{2.71} & \textcolor{red}{1.9} & 1.16 & \textcolor{red}{1.38} & 0.6 & \textcolor{red}{1.83} & 0.66 & 0.54\\
+\rowcolor{lightgray}  queryone & dracozlib & 2.71 & 1.47 & 0.78 & 1.13 & 0.49 & 1.46 & 0.46 & 0.44\\
+\rowcolor{lightgray}  queryone & original & \textcolor{green}{1} & 1 & 1 & 1 & \textcolor{red}{1} & 1 & 1 & 1\\
+\rowcolor{lightgray}  queryone & originalcbor & 1 & 0.96 & 0.8 & 0.95 & 0.8 & 0.94 & 0.7 & 0.71\\
+\rowcolor{lightgray}  queryone & originalcborreplace & 1 & 0.91 & 1.15 & \textcolor{green}{0.6} & 0.53 & \textcolor{green}{0.78} & 0.86 & 0.66\\
+\rowcolor{lightgray}  queryone & originalcborreplacezlib & 1.02 & 0.86 & 1.11 & 0.62 & 0.54 & 0.78 & 0.85 & 0.66\\
+\rowcolor{lightgray}  queryone & originalcborzlib & 1.07 & 0.9 & \textcolor{green}{0.48} & 0.78 & \textcolor{green}{0.3} & 0.81 & \textcolor{green}{0.42} & \textcolor{green}{0.33}\\
+\rowcolor{lightgray}  queryone & originalreplace & 1.26 & 0.96 & \textcolor{red}{1.77} & 0.75 & 0.91 & 1.03 & \textcolor{red}{1.64} & \textcolor{red}{1.14}\\
+\rowcolor{lightgray}  queryone & originalzlib & 1.07 & \textcolor{green}{0.84} & 0.54 & 0.74 & 0.34 & 0.79 & 0.48 & 0.43\\
+\rowcolor{lightgray}  visualise & draco & 1.77 & 1.28 & 0.68 & 1.14 & 0.79 & 1.33 & 0.25 & 0.61\\
+\rowcolor{lightgray}  visualise & dracocbor & NA & NA & NA & NA & NA & NA & NA & NA\\
+\rowcolor{lightgray}  visualise & dracocborreplace & 1.73 & 1.18 & 0.77 & \textcolor{red}{1.2} & 0.53 & \textcolor{red}{1.68} & 0.24 & 0.35\\
+\rowcolor{lightgray}  visualise & dracocborreplacezlib & 1.73 & 1.26 & 0.68 & 0.89 & \textcolor{green}{0.39} & 1.2 & 0.25 & 0.34\\
+\rowcolor{lightgray}  visualise & dracocborzlib & 1.7 & 1.22 & 0.7 & 1.03 & 0.43 & 1.24 & \textcolor{green}{0.23} & 0.13\\
+visualise & dracoreplace & \textcolor{red}{2.46} & \textcolor{red}{1.49} & 0.77 & 1.01 & 0.56 & 1.52 & 0.36 & \textcolor{green}{0.1}\\
+visualise & dracozlib & 1.96 & 1.3 & 0.68 & 0.99 & 0.44 & 1.25 & 0.23 & 0.39\\
+visualise & original & \textcolor{green}{1} & 1 & 1 & 1 & \textcolor{red}{1} & 1 & 1 & 1\\
+visualise & originalcbor & 1.06 & 1.07 & 0.79 & 1.01 & 0.77 & 1.08 & 0.88 & 0.74\\
+visualise & originalcborreplace & 1.4 & 0.92 & 1.15 & \textcolor{green}{0.63} & 0.58 & \textcolor{green}{0.73} & 0.86 & 0.7\\
+visualise & originalcborreplacezlib & 1.01 & \textcolor{green}{0.87} & 1.11 & 0.64 & 0.58 & 0.74 & 0.85 & 0.69\\
+visualise & originalcborzlib & 1.17 & 0.98 & 0.69 & 0.83 & 0.39 & 0.81 & 0.67 & 0.44\\
+visualise & originalreplace & 1.26 & 1.06 & \textcolor{red}{1.61} & 0.78 & 0.91 & 0.81 & \textcolor{red}{1.45} & \textcolor{red}{1.2}\\
+visualise & originalzlib & 1.05 & 0.87 & \textcolor{green}{0.64} & 0.78 & 0.43 & 0.76 & 0.7 & 0.44\\*
+
+\caption{Full benchmark results of compression in advance, datasets without attributes}
+\label{tab:fullresultsianoattr}
+\end{longtable}
+
+\end{landscape}
+
+
+
+
+
+\begin{landscape}
+
+
+\begin{longtable}{llllllllll}
+\toprule
+task & method & delft & denhaag & hdb & montreal & newyork & RotterdamLoD1Lod2 & tudnl3d & Zurich\\
+\midrule
+\endfirsthead
+\multicolumn{10}{@{}l}{\textit{(continued)}}\\
+\toprule
+task & method & delft & denhaag & hdb & montreal & newyork & RotterdamLoD1Lod2 & tudnl3d & Zurich\\
+\midrule
+\endhead
+\
+\endfoot
+\bottomrule
+\endlastfoot
+\rowcolor{lightgray}  bufferall & draco & 2.33 & 2.33 & 2.32 & 1.19 & 2.2 & NA & \textcolor{red}{2.76} & NA\\
+\rowcolor{lightgray}  bufferall & dracocbor & 2.34 & 2.43 & 2.89 & 1.28 & \textcolor{red}{2.29} & 2.18 & 2.68 & NA\\
+\rowcolor{lightgray}  bufferall & dracocborreplace & 1.14 & \textcolor{green}{0.17} & NA & 1.81 & NA & 6.87 & NA & NA\\
+\rowcolor{lightgray}  bufferall & dracocborreplacezlib & 1.09 & 0.79 & \textcolor{red}{8.69} & \textcolor{red}{1.88} & 0.57 & \textcolor{red}{7.9} & 0.75 & NA\\
+\rowcolor{lightgray}  bufferall & dracocborzlib & \textcolor{red}{2.37} & \textcolor{red}{2.48} & 2.15 & 1.28 & 2.11 & 2.19 & 2.51 & NA\\
+\rowcolor{lightgray}  bufferall & dracoreplace & 1.02 & 0.78 & 7.78 & 0.83 & 0.65 & 7.21 & 1 & NA\\
+\rowcolor{lightgray}  bufferall & dracozlib & 2.28 & 2.38 & 0.43 & 1.1 & 0.41 & 2 & \textcolor{green}{0.53} & NA\\
+\rowcolor{lightgray}  bufferall & original & 1 & 1 & 1 & 1 & 1 & 1 & 1 & NA\\
+\rowcolor{lightgray}  bufferall & originalcbor & 0.84 & 0.76 & 0.76 & 0.97 & 0.81 & 0.68 & 0.69 & NA\\
+\rowcolor{lightgray}  bufferall & originalcborreplace & 1.02 & NA & NA & NA & NA & NA & NA & NA\\
+\rowcolor{lightgray}  bufferall & originalcborreplacezlib & 1.3 & 0.93 & 0.93 & \textcolor{green}{0.48} & 0.72 & 0.66 & 0.98 & NA\\
+\rowcolor{lightgray}  bufferall & originalcborzlib & 0.85 & 0.72 & 0.63 & 0.78 & 0.71 & 0.66 & 0.68 & NA\\
+\rowcolor{lightgray}  bufferall & originalreplace & 1.15 & 1.06 & 1.14 & 0.53 & 0.87 & 0.7 & 1.15 & NA\\
+bufferall & originalzlib & \textcolor{green}{0.76} & 0.57 & \textcolor{green}{0.41} & 0.58 & \textcolor{green}{0.39} & \textcolor{green}{0.53} & 0.53 & NA\\
+bufferone & draco & 1.45 & 1.4 & 1.39 & 1.38 & 1.37 & NA & NA & NA\\
+bufferone & dracocbor & 1.5 & 1.4 & 1.39 & 1.39 & 1.4 & 1.43 & \textcolor{red}{1.53} & NA\\
+bufferone & dracocborreplace & 1.62 & NA & 1.42 & \textcolor{red}{1.5} & 1.42 & NA & 1.41 & NA\\
+bufferone & dracocborreplacezlib & \textcolor{red}{1.64} & \textcolor{red}{1.96} & 1.47 & 1.47 & 1.43 & \textcolor{red}{1.72} & 1.41 & NA\\
+bufferone & dracocborzlib & 1.46 & 1.44 & \textcolor{red}{1.49} & 1.44 & \textcolor{red}{1.5} & 1.46 & 1.5 & NA\\
+bufferone & dracoreplace & 1.53 & 1.61 & 1.38 & 1.46 & 1.38 & 1.56 & 1.42 & NA\\
+bufferone & dracozlib & 1.48 & 1.43 & 1.41 & 1.4 & 1.41 & 1.48 & 1.44 & \textcolor{green}{0.05}\\
+bufferone & original & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+bufferone & originalcbor & 1 & \textcolor{green}{0.98} & \textcolor{green}{0.98} & \textcolor{green}{0.98} & 1.05 & 1 & \textcolor{green}{0.98} & 0.84\\
+bufferone & originalcborreplace & \textcolor{green}{0.99} & NA & NA & NA & NA & NA & NA & NA\\
+bufferone & originalcborreplacezlib & 1.05 & 0.99 & 1.02 & 0.99 & 1.01 & 1.01 & 1.03 & NA\\
+bufferone & originalcborzlib & 1.05 & 0.98 & 1 & 0.99 & 1.13 & 1.02 & 1 & 0.41\\
+\rowcolor{lightgray}  bufferone & originalreplace & 1.06 & 0.98 & 1.02 & 1.02 & 1.01 & 1.03 & 0.99 & \textcolor{red}{1.24}\\
+\rowcolor{lightgray}  bufferone & originalzlib & 1.13 & 1 & 0.98 & 0.98 & \textcolor{green}{0.99} & \textcolor{green}{0.99} & 1 & 0.47\\
+\rowcolor{lightgray}  editattrall & draco & 1.36 & 1.2 & 39.54 & 1.03 & 22.35 & NA & 2.13 & 14.07\\
+\rowcolor{lightgray}  editattrall & dracocbor & 1.38 & 1.29 & 41.66 & 1.09 & \textcolor{red}{52.04} & 1.31 & 3.76 & 23.83\\
+\rowcolor{lightgray}  editattrall & dracocborreplace & \textcolor{red}{1.48} & NA & 42.83 & 0.76 & 25.05 & NA & \textcolor{red}{23.59} & 29.39\\
+\rowcolor{lightgray}  editattrall & dracocborreplacezlib & 1.46 & \textcolor{red}{1.53} & \textcolor{red}{47.35} & 0.76 & 1.69 & \textcolor{red}{1.37} & 1.69 & \textcolor{red}{32.21}\\
+\rowcolor{lightgray}  editattrall & dracocborzlib & 1.41 & 1.27 & 30.37 & \textcolor{red}{1.12} & 38.75 & 1.36 & 3.8 & 27.1\\
+\rowcolor{lightgray}  editattrall & dracoreplace & 1.41 & 1.27 & 41.99 & 0.79 & 1.98 & 1.35 & 2.86 & 27.5\\
+\rowcolor{lightgray}  editattrall & dracozlib & 1.39 & 1.23 & 16.13 & 0.96 & 20.95 & 1.29 & 2.86 & 17.69\\
+\rowcolor{lightgray}  editattrall & original & \textcolor{green}{1} & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+\rowcolor{lightgray}  editattrall & originalcbor & 1.02 & 1 & 0.81 & 0.91 & 0.92 & 0.96 & 0.84 & 0.8\\
+\rowcolor{lightgray}  editattrall & originalcborreplace & 1.06 & NA & NA & NA & NA & NA & NA & NA\\
+\rowcolor{lightgray}  editattrall & originalcborreplacezlib & 1.06 & 1.08 & 1.57 & 0.77 & 1.66 & 1.17 & 1.73 & NA\\
+editattrall & originalcborzlib & 1.01 & 0.95 & 0.66 & 0.95 & 0.7 & 1.04 & 0.85 & 0.47\\
+editattrall & originalreplace & 1.12 & 1.09 & 2.11 & 0.81 & 2.1 & 1.27 & 2.15 & 1.57\\
+editattrall & originalzlib & 1.13 & \textcolor{green}{0.87} & \textcolor{green}{0.56} & \textcolor{green}{0.72} & \textcolor{green}{0.43} & \textcolor{green}{0.94} & \textcolor{green}{0.52} & \textcolor{green}{0.38}\\
+editattrone & draco & 1.15 & 2.96 & 4.38 & 0.72 & 5.48 & NA & NA & 9.68\\
+editattrone & dracocbor & 1.17 & \textcolor{red}{3.19} & 4.6 & 0.8 & 5.86 & 4.83 & 0.46 & NA\\
+editattrone & dracocborreplace & 1.39 & \textcolor{green}{0.41} & NA & 1.53 & NA & 10.16 & NA & NA\\
+editattrone & dracocborreplacezlib & 1.37 & 1.29 & \textcolor{red}{13.97} & \textcolor{red}{1.63} & 0.42 & \textcolor{red}{11.57} & 0.42 & NA\\
+editattrone & dracocborzlib & 1.18 & 3.19 & 5.61 & 0.82 & \textcolor{red}{6.34} & 4.95 & 0.44 & NA\\
+editattrone & dracoreplace & 1.28 & 1.22 & 12.4 & 0.65 & 0.5 & 10.72 & 0.76 & NA\\
+editattrone & dracozlib & \textcolor{red}{13.25} & 2.93 & 4.51 & 0.64 & 5.47 & 4.52 & \textcolor{green}{0.36} & \textcolor{red}{10.22}\\
+editattrone & original & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+editattrone & originalcbor & \textcolor{green}{0.94} & 0.91 & 0.86 & 0.82 & 0.88 & 0.83 & 0.77 & 1.31\\
+editattrone & originalcborreplace & 1 & NA & NA & NA & NA & NA & NA & NA\\
+\rowcolor{lightgray}  editattrone & originalcborreplacezlib & 1.14 & 0.87 & 0.96 & 0.55 & 0.7 & 0.71 & 1.05 & NA\\
+\rowcolor{lightgray}  editattrone & originalcborzlib & 0.96 & 0.8 & 0.57 & 0.77 & 0.56 & 0.8 & 0.7 & NA\\
+\rowcolor{lightgray}  editattrone & originalreplace & 1.14 & 1 & 1.28 & 0.68 & 0.87 & 0.8 & \textcolor{red}{1.37} & \textcolor{green}{0.6}\\
+\rowcolor{lightgray}  editattrone & originalzlib & 1.11 & 0.62 & \textcolor{green}{0.33} & \textcolor{green}{0.52} & \textcolor{green}{0.26} & \textcolor{green}{0.59} & 0.36 & NA\\
+\rowcolor{lightgray}  editgeomall & draco & 1.15 & 2.97 & \textcolor{red}{4.78} & 0.69 & \textcolor{red}{5.61} & NA & 0.41 & \textcolor{red}{3.55}\\
+\rowcolor{lightgray}  editgeomall & dracocbor & 1.18 & \textcolor{red}{3.07} & NA & 0.8 & NA & 4.82 & NA & NA\\
+\rowcolor{lightgray}  editgeomall & dracocborreplace & \textcolor{red}{1.41} & \textcolor{green}{0.4} & NA & 1.56 & NA & 10.76 & NA & NA\\
+\rowcolor{lightgray}  editgeomall & dracocborreplacezlib & 1.36 & 1.23 & NA & \textcolor{red}{1.6} & NA & \textcolor{red}{11.91} & NA & NA\\
+\rowcolor{lightgray}  editgeomall & dracocborzlib & 1.2 & 3.01 & NA & 0.75 & NA & 4.91 & NA & NA\\
+\rowcolor{lightgray}  editgeomall & dracoreplace & 1.3 & 1.23 & NA & 0.66 & NA & 10.89 & NA & NA\\
+\rowcolor{lightgray}  editgeomall & dracozlib & 1.16 & 2.86 & 4.7 & 0.64 & 5.42 & 4.61 & \textcolor{green}{0.33} & 3.29\\
+\rowcolor{lightgray}  editgeomall & original & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+\rowcolor{lightgray}  editgeomall & originalcbor & 0.94 & 0.9 & 0.85 & 0.77 & 0.82 & 0.84 & 1.29 & 0.32\\
+editgeomall & originalcborreplace & 1.01 & NA & NA & NA & NA & NA & NA & NA\\
+editgeomall & originalcborreplacezlib & 1.15 & 0.86 & 1.01 & 0.53 & 0.7 & 0.74 & 1.03 & NA\\
+editgeomall & originalcborzlib & 0.93 & 0.79 & 0.58 & 0.74 & 0.68 & 0.81 & 0.7 & NA\\
+editgeomall & originalreplace & 1.1 & 1 & 1.35 & 0.65 & 0.94 & 0.81 & \textcolor{red}{1.34} & NA\\
+editgeomall & originalzlib & \textcolor{green}{0.86} & 0.62 & \textcolor{green}{0.29} & \textcolor{green}{0.52} & \textcolor{green}{0.26} & \textcolor{green}{0.63} & 0.34 & \textcolor{green}{0.27}\\
+editgeomone & draco & 1.12 & 3.07 & 4.44 & 0.71 & 5.54 & NA & NA & 10.6\\
+editgeomone & dracocbor & 1.16 & 3.08 & 11.7 & 0.8 & \textcolor{red}{13.23} & 4.65 & 0.98 & NA\\
+editgeomone & dracocborreplace & \textcolor{red}{1.39} & \textcolor{green}{0.4} & NA & 1.59 & NA & 10.27 & NA & NA\\
+editgeomone & dracocborreplacezlib & 1.32 & 1.28 & \textcolor{red}{13.3} & \textcolor{red}{1.65} & 0.33 & \textcolor{red}{11.5} & 0.36 & NA\\
+editgeomone & dracocborzlib & 1.16 & \textcolor{red}{3.1} & 9.02 & 0.8 & 9.95 & 4.78 & 0.96 & NA\\
+editgeomone & dracoreplace & 1.25 & 1.23 & 11.89 & 0.67 & 0.42 & 10.6 & 0.65 & NA\\
+editgeomone & dracozlib & 1.1 & 2.92 & 4.33 & 0.66 & 5.39 & 4.66 & \textcolor{green}{0.33} & \textcolor{red}{12.44}\\
+editgeomone & original & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+\rowcolor{lightgray}  editgeomone & originalcbor & \textcolor{green}{0.93} & 0.89 & 0.81 & 0.79 & 0.85 & 0.82 & 0.76 & 1.04\\
+\rowcolor{lightgray}  editgeomone & originalcborreplace & 0.99 & NA & NA & NA & NA & NA & NA & NA\\
+\rowcolor{lightgray}  editgeomone & originalcborreplacezlib & 1.24 & 0.88 & 0.93 & 0.59 & 1.06 & 0.72 & 1 & NA\\
+\rowcolor{lightgray}  editgeomone & originalcborzlib & 0.94 & 0.8 & 0.58 & 0.81 & 0.68 & 0.78 & 0.68 & NA\\
+\rowcolor{lightgray}  editgeomone & originalreplace & 1.1 & 0.95 & 1.25 & 0.67 & 0.91 & 0.85 & \textcolor{red}{1.31} & 1.29\\
+\rowcolor{lightgray}  editgeomone & originalzlib & 1.08 & 0.63 & \textcolor{green}{0.34} & \textcolor{green}{0.52} & \textcolor{green}{0.27} & \textcolor{green}{0.6} & 0.35 & \textcolor{green}{0.85}\\
+\rowcolor{lightgray}  queryall & draco & 1.19 & 2.78 & 3.98 & 0.73 & 4.53 & NA & 0.83 & 31.26\\
+\rowcolor{lightgray}  queryall & dracocbor & 1.18 & 2.88 & 9.38 & 0.84 & \textcolor{red}{10.29} & 4.68 & 3.04 & 44.22\\
+\rowcolor{lightgray}  queryall & dracocborreplace & \textcolor{red}{1.41} & \textcolor{green}{0.36} & 10.07 & 1.54 & 5.09 & 9.74 & \textcolor{red}{16.45} & 52.75\\
+\rowcolor{lightgray}  queryall & dracocborreplacezlib & 1.34 & 1.26 & \textcolor{red}{11.08} & \textcolor{red}{1.6} & 0.56 & \textcolor{red}{10.97} & 1.6 & \textcolor{red}{59.56}\\
+\rowcolor{lightgray}  queryall & dracocborzlib & 1.15 & \textcolor{red}{2.95} & 7.35 & 0.85 & 7.58 & 4.45 & 3.02 & 47.17\\
+\rowcolor{lightgray}  queryall & dracoreplace & 1.3 & 1.28 & 9.85 & 0.73 & 0.62 & 10.11 & 2.4 & 47.98\\
+\rowcolor{lightgray}  queryall & dracozlib & 1.16 & 2.68 & 3.79 & 0.68 & 4.38 & 4.3 & 0.82 & 30.48\\
+queryall & original & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+queryall & originalcbor & 0.92 & 0.91 & 0.88 & 0.84 & 0.89 & 0.87 & 0.92 & 0.83\\
+queryall & originalcborreplace & 1.04 & NA & NA & NA & NA & NA & NA & NA\\
+queryall & originalcborreplacezlib & 1.17 & 0.9 & 1.02 & 0.65 & 0.77 & 0.76 & 1.05 & NA\\
+queryall & originalcborzlib & 0.99 & 0.82 & 0.67 & 0.82 & 0.68 & 0.8 & 0.85 & 0.45\\
+queryall & originalreplace & 1.12 & 0.99 & 1.21 & 0.72 & 0.94 & 0.79 & 1.2 & 1.31\\
+queryall & originalzlib & \textcolor{green}{0.91} & 0.7 & \textcolor{green}{0.48} & \textcolor{green}{0.59} & \textcolor{green}{0.46} & \textcolor{green}{0.64} & \textcolor{green}{0.72} & \textcolor{green}{0.38}\\
+queryone & draco & 1.4 & 1.43 & 1.21 & 1.28 & 1.14 & NA & NA & \textcolor{green}{0.17}\\
+queryone & dracocbor & 1.42 & 1.42 & 1.31 & 1.29 & 1.17 & 1.05 & \textcolor{red}{1.46} & NA\\
+queryone & dracocborreplace & \textcolor{red}{1.56} & NA & 1.27 & 1.36 & 1.14 & NA & 1.18 & NA\\
+queryone & dracocborreplacezlib & 1.56 & \textcolor{red}{1.88} & \textcolor{red}{1.49} & \textcolor{red}{1.39} & 1.27 & \textcolor{red}{1.63} & 1.16 & NA\\
+queryone & dracocborzlib & 1.44 & 1.43 & 1.31 & 1.32 & 1.26 & 1.37 & 1.3 & NA\\
+queryone & dracoreplace & 1.46 & 1.61 & 1.28 & 1.35 & 1.22 & 1.45 & 1.23 & NA\\
+\rowcolor{lightgray}  queryone & dracozlib & 1.38 & 1.44 & 1.3 & 1.28 & 1.24 & 1.38 & 1.23 & 0.19\\
+\rowcolor{lightgray}  queryone & original & 1 & 1 & 1 & 1 & \textcolor{green}{1} & 1 & 1 & 1\\
+\rowcolor{lightgray}  queryone & originalcbor & \textcolor{green}{0.95} & \textcolor{green}{0.99} & 1 & 0.98 & 1.04 & 1.03 & 1.01 & 0.84\\
+\rowcolor{lightgray}  queryone & originalcborreplace & 0.96 & NA & NA & NA & NA & NA & NA & NA\\
+\rowcolor{lightgray}  queryone & originalcborreplacezlib & 1.08 & 1.05 & 1.07 & 0.97 & 1.08 & 0.99 & \textcolor{green}{0.99} & NA\\
+\rowcolor{lightgray}  queryone & originalcborzlib & 1 & 1 & \textcolor{green}{0.99} & \textcolor{green}{0.94} & \textcolor{red}{1.33} & \textcolor{green}{0.98} & 1.03 & 0.49\\
+\rowcolor{lightgray}  queryone & originalreplace & 0.99 & 1.06 & 1 & 0.96 & 1.03 & 1.01 & 1.01 & \textcolor{red}{1.33}\\
+\rowcolor{lightgray}  queryone & originalzlib & 1.01 & 1.03 & 1.03 & 0.96 & 1.04 & 0.98 & 1 & 0.38\\
+\rowcolor{lightgray}  visualise & draco & NA & NA & 5.83 & NA & 5.33 & NA & 0.46 & 9.03\\
+\rowcolor{lightgray}  visualise & dracocbor & \textcolor{red}{2.37} & 3.03 & 11.03 & 0.96 & \textcolor{red}{11.9} & 4.62 & 0.86 & 19.17\\
+\rowcolor{lightgray}  visualise & dracocborreplace & 1.69 & \textcolor{green}{0.35} & 11.35 & \textcolor{red}{1.68} & 5.99 & 9.58 & \textcolor{red}{4.48} & 23.7\\
+\rowcolor{lightgray}  visualise & dracocborreplacezlib & 1.67 & 1.39 & \textcolor{red}{12.34} & 1.66 & 0.58 & \textcolor{red}{11.09} & 0.46 & \textcolor{red}{26.5}\\
+\rowcolor{lightgray}  visualise & dracocborzlib & 1.48 & \textcolor{red}{3.05} & 8.32 & 0.92 & 9.09 & 4.68 & 0.85 & 21.66\\
+visualise & dracoreplace & 1.56 & 1.39 & 11.36 & 0.84 & 0.66 & 9.98 & 0.67 & 22.53\\
+visualise & dracozlib & 1.41 & 2.74 & 4.16 & 0.79 & 5.11 & 4.47 & \textcolor{green}{0.4} & 8.65\\
+visualise & original & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+visualise & originalcbor & 0.94 & 0.89 & 0.83 & 0.95 & 0.89 & 0.83 & 0.83 & 0.99\\
+visualise & originalcborreplace & 0.99 & NA & NA & NA & NA & NA & NA & NA\\
+visualise & originalcborreplacezlib & 1.01 & 0.87 & 0.97 & 0.6 & 0.73 & 0.74 & 1.01 & NA\\
+visualise & originalcborzlib & 0.96 & 0.79 & 0.62 & 0.79 & 0.61 & 0.77 & 0.79 & \textcolor{green}{0.57}\\
+visualise & originalreplace & 1.11 & 0.96 & 1.25 & 0.71 & 0.92 & 0.77 & 1.26 & 1.57\\
+visualise & originalzlib & \textcolor{green}{0.87} & 0.7 & \textcolor{green}{0.36} & \textcolor{green}{0.57} & \textcolor{green}{0.34} & \textcolor{green}{0.65} & 0.55 & 0.61\\*
+\caption{Full benchmark results of compression on the fly, datasets with attributes}
+\label{tab:fullresultsotfattr}
+\end{longtable}
+
+
+
+
+
+\end{landscape}
+
+
+\begin{landscape}
+
+
+\begin{longtable}{llllllllll}
+\toprule
+task & method & delft & denhaag & hdb & montreal & newyork & RotterdamLoD1Lod2 & tudnl3d & Zurich\\
+\midrule
+\endfirsthead
+\multicolumn{10}{@{}l}{\textit{(continued)}}\\
+\toprule
+task & method & delft & denhaag & hdb & montreal & newyork & RotterdamLoD1Lod2 & tudnl3d & Zurich\\
+\midrule
+\endhead
+\
+\endfoot
+\bottomrule
+\endlastfoot
+\rowcolor{lightgray}  bufferall & draco & 2.38 & 2.43 & 2.94 & 1.22 & 2.16 & NA & \textcolor{red}{2.84} & NA\\
+\rowcolor{lightgray}  bufferall & dracocbor & 2.34 & \textcolor{red}{2.59} & 2.52 & \textcolor{red}{1.38} & 1.98 & 2.2 & 2.82 & NA\\
+\rowcolor{lightgray}  bufferall & dracocborreplace & 1.08 & 1.04 & NA & 1 & NA & 3.42 & NA & NA\\
+\rowcolor{lightgray}  bufferall & dracocborreplacezlib & 1.09 & 1.66 & \textcolor{red}{4.72} & 0.93 & \textcolor{red}{5.04} & \textcolor{red}{4.11} & 0.94 & NA\\
+\rowcolor{lightgray}  bufferall & dracocborzlib & \textcolor{red}{2.4} & 2.43 & 2.9 & 1.36 & 2.14 & 2.35 & 2.82 & NA\\
+\rowcolor{lightgray}  bufferall & dracoreplace & 1.04 & 1.63 & 4.71 & 0.88 & 5.04 & 4.06 & 0.9 & NA\\
+\rowcolor{lightgray}  bufferall & dracozlib & 2.3 & 2.38 & \textcolor{green}{0.5} & 1.16 & 0.42 & 2.1 & 0.56 & NA\\
+\rowcolor{lightgray}  bufferall & original & 1 & 1 & 1 & 1 & 1 & 1 & 1 & NA\\
+\rowcolor{lightgray}  bufferall & originalcbor & 0.85 & 0.76 & 0.83 & 0.81 & 0.77 & 0.71 & 0.7 & NA\\
+\rowcolor{lightgray}  bufferall & originalcborreplace & 1.04 & NA & NA & NA & NA & NA & NA & NA\\
+\rowcolor{lightgray}  bufferall & originalcborreplacezlib & 1.12 & 0.95 & 1 & 0.55 & 0.73 & 0.68 & 1.04 & NA\\
+\rowcolor{lightgray}  bufferall & originalcborzlib & 0.84 & 0.76 & 0.7 & 0.85 & 0.64 & 0.69 & 0.72 & NA\\
+\rowcolor{lightgray}  bufferall & originalreplace & 1.13 & 1.07 & 1.17 & \textcolor{green}{0.53} & 0.92 & 0.77 & 1.19 & NA\\
+bufferall & originalzlib & \textcolor{green}{0.77} & \textcolor{green}{0.56} & 0.56 & 0.6 & \textcolor{green}{0.41} & \textcolor{green}{0.6} & \textcolor{green}{0.54} & NA\\
+bufferone & draco & 1.43 & 1.38 & 1.4 & 1.42 & 1.37 & NA & NA & \textcolor{red}{-2304.48}\\
+bufferone & dracocbor & 1.47 & 1.41 & 1.46 & 1.4 & 1.48 & 1.51 & \textcolor{red}{1.54} & NA\\
+bufferone & dracocborreplace & 1.6 & NA & 1.44 & \textcolor{red}{1.65} & 1.43 & NA & 1.41 & NA\\
+bufferone & dracocborreplacezlib & \textcolor{red}{1.61} & \textcolor{red}{1.92} & 1.53 & 1.47 & 1.38 & \textcolor{red}{1.72} & 1.44 & NA\\
+bufferone & dracocborzlib & 1.46 & 1.4 & \textcolor{red}{1.6} & 1.4 & 1.52 & 1.45 & 1.46 & NA\\
+bufferone & dracoreplace & 1.5 & 1.65 & 1.42 & 1.42 & 1.39 & 1.55 & 1.41 & NA\\
+bufferone & dracozlib & 1.42 & 1.38 & 1.43 & 1.43 & \textcolor{red}{1.53} & 1.46 & 1.41 & \textcolor{green}{-2527.15}\\
+bufferone & original & 1 & 1 & \textcolor{green}{1} & 1 & \textcolor{green}{1} & 1 & \textcolor{green}{1} & NA\\
+bufferone & originalcbor & \textcolor{green}{0.97} & 0.99 & 1.06 & 0.98 & 1.06 & \textcolor{green}{0.99} & 1.07 & NA\\
+bufferone & originalcborreplace & 1.02 & NA & NA & NA & NA & NA & NA & NA\\
+bufferone & originalcborreplacezlib & 1.09 & 0.99 & 1.01 & 0.96 & 1.01 & 1.02 & 1.02 & NA\\
+bufferone & originalcborzlib & 0.99 & \textcolor{green}{0.95} & 1 & 0.97 & 1.06 & 1 & 1 & NA\\
+\rowcolor{lightgray}  bufferone & originalreplace & 1.04 & 1 & 1 & 1 & 1.04 & 1.04 & 1.02 & NA\\
+\rowcolor{lightgray}  bufferone & originalzlib & 1 & 0.99 & 1.01 & \textcolor{green}{0.95} & 1.04 & 1.01 & 1 & NA\\
+\rowcolor{lightgray}  editattrall & draco & 1.37 & 1.25 & \textcolor{red}{22.87} & 1 & \textcolor{red}{31.39} & NA & \textcolor{red}{2.36} & \textcolor{green}{0.33}\\
+\rowcolor{lightgray}  editattrall & dracocbor & 1.37 & 1.26 & 16.64 & 1.06 & 29.24 & 1.3 & 2.04 & \textcolor{red}{11.94}\\
+\rowcolor{lightgray}  editattrall & dracocborreplace & \textcolor{red}{1.5} & NA & NA & 0.9 & NA & NA & NA & NA\\
+\rowcolor{lightgray}  editattrall & dracocborreplacezlib & 1.43 & \textcolor{red}{1.54} & 16.95 & 0.76 & 28.33 & \textcolor{red}{1.39} & 2.06 & 11.2\\
+\rowcolor{lightgray}  editattrall & dracocborzlib & 1.41 & 1.26 & 17.11 & \textcolor{red}{1.09} & 28.43 & 1.31 & NA & 11.53\\
+\rowcolor{lightgray}  editattrall & dracoreplace & 1.42 & 1.3 & 16.76 & 0.77 & 28.54 & 1.37 & 1.97 & 11.45\\
+\rowcolor{lightgray}  editattrall & dracozlib & 1.38 & 1.22 & 17.47 & 0.99 & 28.42 & 1.28 & 2.18 & NA\\
+\rowcolor{lightgray}  editattrall & original & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+\rowcolor{lightgray}  editattrall & originalcbor & 1.01 & 0.97 & 0.75 & 0.89 & 0.89 & 0.95 & 1.01 & 0.73\\
+\rowcolor{lightgray}  editattrall & originalcborreplace & 1.08 & NA & NA & NA & NA & NA & NA & NA\\
+\rowcolor{lightgray}  editattrall & originalcborreplacezlib & 1.29 & 1.08 & 1.59 & 0.78 & 1.6 & 1.21 & 1.7 & NA\\
+editattrall & originalcborzlib & \textcolor{green}{0.99} & 0.95 & 0.67 & 0.91 & 0.84 & 1.01 & 0.89 & 0.34\\
+editattrall & originalreplace & 1.13 & 1.12 & 2.16 & 0.84 & 1.99 & 1.3 & 2.09 & NA\\
+editattrall & originalzlib & 1.02 & \textcolor{green}{0.85} & \textcolor{green}{0.51} & \textcolor{green}{0.74} & \textcolor{green}{0.41} & \textcolor{green}{0.92} & \textcolor{green}{0.51} & 0.52\\
+editattrone & draco & 1.14 & 3.14 & 8.1 & 0.69 & 5.18 & NA & NA & 9.22\\
+editattrone & dracocbor & 1.15 & 3.27 & 8.43 & 0.8 & 6.6 & 4.81 & 0.47 & NA\\
+editattrone & dracocborreplace & 1.33 & 2.39 & NA & 0.69 & NA & 4.95 & NA & NA\\
+editattrone & dracocborreplacezlib & \textcolor{red}{1.34} & \textcolor{red}{3.49} & 9.46 & 0.7 & \textcolor{red}{7.37} & \textcolor{red}{5.84} & 0.53 & NA\\
+editattrone & dracocborzlib & 1.2 & 3.18 & \textcolor{red}{10.28} & 0.82 & 6.16 & 4.96 & 0.48 & NA\\
+editattrone & dracoreplace & 1.25 & 3.24 & 9.72 & 0.68 & 7.26 & 5.69 & 0.53 & NA\\
+editattrone & dracozlib & 1.18 & 2.96 & 8.76 & 0.63 & 5.11 & 4.75 & \textcolor{green}{0.35} & \textcolor{red}{11.97}\\
+editattrone & original & 1 & 1 & 1 & \textcolor{red}{1} & 1 & 1 & 1 & 1\\
+editattrone & originalcbor & 0.92 & 0.9 & 0.75 & 0.83 & 0.83 & 0.86 & 0.87 & 0.79\\
+editattrone & originalcborreplace & 1.03 & NA & NA & NA & NA & NA & NA & NA\\
+\rowcolor{lightgray}  editattrone & originalcborreplacezlib & 1.17 & 0.94 & 1.28 & 0.57 & 0.68 & 0.73 & 1.04 & NA\\
+\rowcolor{lightgray}  editattrone & originalcborzlib & 1 & 0.81 & 0.67 & 0.77 & 0.66 & 0.79 & 0.72 & \textcolor{green}{0.73}\\
+\rowcolor{lightgray}  editattrone & originalreplace & 1.07 & 1 & 1.72 & 0.63 & 0.92 & 0.82 & \textcolor{red}{1.38} & 1.59\\
+\rowcolor{lightgray}  editattrone & originalzlib & \textcolor{green}{0.9} & \textcolor{green}{0.65} & \textcolor{green}{0.45} & \textcolor{green}{0.51} & \textcolor{green}{0.26} & \textcolor{green}{0.61} & 0.36 & 0.73\\
+\rowcolor{lightgray}  editgeomall & draco & 1.19 & 3.01 & \textcolor{red}{8.61} & 0.7 & \textcolor{red}{5.89} & NA & 0.37 & \textcolor{red}{10.25}\\
+\rowcolor{lightgray}  editgeomall & dracocbor & 1.2 & 3.3 & NA & 0.79 & NA & 4.78 & NA & NA\\
+\rowcolor{lightgray}  editgeomall & dracocborreplace & \textcolor{red}{1.36} & 2.32 & NA & 0.76 & NA & 4.91 & NA & NA\\
+\rowcolor{lightgray}  editgeomall & dracocborreplacezlib & 1.36 & \textcolor{red}{3.35} & NA & 0.69 & NA & \textcolor{red}{5.74} & NA & NA\\
+\rowcolor{lightgray}  editgeomall & dracocborzlib & 1.2 & 3.19 & NA & 0.8 & NA & 4.86 & NA & NA\\
+\rowcolor{lightgray}  editgeomall & dracoreplace & 1.3 & 3.25 & NA & 0.71 & NA & 5.71 & NA & NA\\
+\rowcolor{lightgray}  editgeomall & dracozlib & 1.2 & 2.98 & 8.36 & 0.64 & 5.58 & 4.73 & \textcolor{green}{0.34} & NA\\
+\rowcolor{lightgray}  editgeomall & original & 1 & 1 & 1 & \textcolor{red}{1} & 1 & 1 & 1 & 1\\
+\rowcolor{lightgray}  editgeomall & originalcbor & 0.97 & 0.94 & 0.83 & 0.82 & 0.85 & 0.84 & 0.76 & NA\\
+editgeomall & originalcborreplace & 1.05 & NA & NA & NA & NA & NA & NA & NA\\
+editgeomall & originalcborreplacezlib & 1.2 & 0.89 & 1.24 & 0.56 & 0.74 & 0.75 & 1.06 & NA\\
+editgeomall & originalcborzlib & 0.99 & 0.82 & 0.65 & 0.75 & 0.66 & 0.78 & 0.75 & \textcolor{green}{0.72}\\
+editgeomall & originalreplace & 1.18 & 0.97 & 1.64 & 0.66 & 0.91 & 0.8 & \textcolor{red}{1.43} & 1.21\\
+editgeomall & originalzlib & \textcolor{green}{0.91} & \textcolor{green}{0.66} & \textcolor{green}{0.44} & \textcolor{green}{0.52} & \textcolor{green}{0.27} & \textcolor{green}{0.62} & 0.37 & 0.81\\
+editgeomone & draco & 1.13 & 3.09 & 7.91 & 0.73 & 5.29 & NA & NA & \textcolor{red}{10.45}\\
+editgeomone & dracocbor & 1.14 & 3.25 & \textcolor{red}{9.39} & 0.83 & 7.56 & 4.98 & 0.58 & NA\\
+editgeomone & dracocborreplace & \textcolor{red}{1.34} & 2.4 & NA & 0.81 & NA & 5.04 & NA & NA\\
+editgeomone & dracocborreplacezlib & 1.32 & \textcolor{red}{3.46} & 9.35 & 0.73 & 7.37 & \textcolor{red}{5.84} & 0.52 & NA\\
+editgeomone & dracocborzlib & 1.19 & 3.22 & 9.26 & 0.81 & \textcolor{red}{7.63} & 4.99 & 0.55 & NA\\
+editgeomone & dracoreplace & 1.24 & 3.34 & 9.11 & 0.7 & 7.26 & 5.78 & 0.51 & NA\\
+editgeomone & dracozlib & 1.15 & 2.85 & 8.4 & 0.67 & 5.42 & 4.8 & \textcolor{green}{0.34} & 10.14\\
+editgeomone & original & 1 & 1 & 1 & \textcolor{red}{1} & 1 & 1 & 1 & 1\\
+\rowcolor{lightgray}  editgeomone & originalcbor & 0.93 & 0.88 & 0.73 & 0.85 & 0.85 & 0.85 & 0.86 & 1.19\\
+\rowcolor{lightgray}  editgeomone & originalcborreplace & 1.03 & NA & NA & NA & NA & NA & NA & NA\\
+\rowcolor{lightgray}  editgeomone & originalcborreplacezlib & 1.18 & 0.86 & 1.24 & 0.57 & 0.7 & 0.75 & 1 & NA\\
+\rowcolor{lightgray}  editgeomone & originalcborzlib & 0.96 & 0.82 & 0.65 & 0.79 & 0.66 & 0.81 & 0.72 & \textcolor{green}{0.75}\\
+\rowcolor{lightgray}  editgeomone & originalreplace & 1.08 & 1 & 1.59 & 0.66 & 0.88 & 0.79 & \textcolor{red}{1.35} & 1.28\\
+\rowcolor{lightgray}  editgeomone & originalzlib & \textcolor{green}{0.87} & \textcolor{green}{0.66} & \textcolor{green}{0.43} & \textcolor{green}{0.53} & \textcolor{green}{0.27} & \textcolor{green}{0.62} & 0.36 & 1.11\\
+\rowcolor{lightgray}  queryall & draco & 1.16 & 2.87 & 5.93 & 0.73 & 4.5 & NA & 0.56 & 28.93\\
+\rowcolor{lightgray}  queryall & dracocbor & 1.18 & 2.83 & 6.6 & 0.85 & \textcolor{red}{6.11} & 4.71 & 0.71 & 29.95\\
+\rowcolor{lightgray}  queryall & dracocborreplace & \textcolor{red}{1.35} & 2.12 & NA & 0.79 & NA & 4.63 & NA & NA\\
+\rowcolor{lightgray}  queryall & dracocborreplacezlib & 1.34 & \textcolor{red}{3.12} & \textcolor{red}{6.75} & 0.75 & 5.88 & \textcolor{red}{5.57} & 0.7 & \textcolor{red}{31.65}\\
+\rowcolor{lightgray}  queryall & dracocborzlib & 1.21 & 2.96 & 6.69 & 0.83 & 5.82 & 4.56 & 0.67 & 30.47\\
+\rowcolor{lightgray}  queryall & dracoreplace & 1.28 & 2.95 & 6.68 & 0.8 & 5.93 & 5.38 & 0.68 & 31.21\\
+\rowcolor{lightgray}  queryall & dracozlib & 1.17 & 2.64 & 6 & 0.69 & 4.41 & 4.49 & 0.55 & NA\\
+queryall & original & 1 & 1 & 1 & \textcolor{red}{1} & 1 & 1 & 1 & 1\\
+queryall & originalcbor & 0.99 & 0.87 & 0.81 & 0.83 & 0.91 & 0.87 & 0.92 & 0.74\\
+queryall & originalcborreplace & 1.05 & NA & NA & NA & NA & NA & NA & NA\\
+queryall & originalcborreplacezlib & 1.18 & 0.86 & 1.15 & 0.64 & 0.77 & 0.75 & 1.04 & NA\\
+queryall & originalcborzlib & 0.98 & 0.84 & 0.79 & 0.8 & 0.81 & 0.79 & 0.8 & \textcolor{green}{0.33}\\
+queryall & originalreplace & 1.13 & 0.95 & 1.45 & 0.75 & 0.93 & 0.81 & \textcolor{red}{1.28} & 1.17\\
+queryall & originalzlib & \textcolor{green}{0.9} & \textcolor{green}{0.65} & \textcolor{green}{0.61} & \textcolor{green}{0.58} & \textcolor{green}{0.45} & \textcolor{green}{0.65} & \textcolor{green}{0.53} & 0.44\\
+queryone & draco & 1.41 & 1.41 & 1.28 & 1.3 & 1.11 & NA & NA & \textcolor{green}{0.16}\\
+queryone & dracocbor & 1.4 & 1.47 & 1.32 & 1.33 & \textcolor{red}{1.39} & 1.38 & \textcolor{red}{1.53} & NA\\
+queryone & dracocborreplace & 1.55 & NA & 1.34 & \textcolor{red}{1.7} & 1.2 & NA & 1.21 & NA\\
+queryone & dracocborreplacezlib & \textcolor{red}{1.58} & \textcolor{red}{1.94} & \textcolor{red}{1.47} & 1.39 & 1.23 & \textcolor{red}{1.67} & 1.27 & NA\\
+queryone & dracocborzlib & 1.43 & 1.49 & 1.44 & 1.33 & 1.33 & 1.42 & 1.22 & NA\\
+queryone & dracoreplace & 1.49 & 1.64 & 1.31 & 1.35 & 1.16 & 1.5 & 1.22 & NA\\
+\rowcolor{lightgray}  queryone & dracozlib & 1.39 & 1.47 & 1.32 & 1.34 & 1.14 & 1.39 & 1.22 & 0.17\\
+\rowcolor{lightgray}  queryone & original & 1 & \textcolor{green}{1} & 1 & 1 & \textcolor{green}{1} & 1 & \textcolor{green}{1} & 1\\
+\rowcolor{lightgray}  queryone & originalcbor & 0.99 & 1.01 & 0.99 & 1.01 & 1.05 & \textcolor{green}{0.98} & 1.2 & 0.71\\
+\rowcolor{lightgray}  queryone & originalcborreplace & \textcolor{green}{0.98} & NA & NA & NA & NA & NA & NA & NA\\
+\rowcolor{lightgray}  queryone & originalcborreplacezlib & 1.12 & 1.02 & 1.04 & 1.02 & 1.08 & 0.99 & 1.01 & NA\\
+\rowcolor{lightgray}  queryone & originalcborzlib & 1 & 1.01 & \textcolor{green}{0.98} & \textcolor{green}{0.98} & 1.16 & 1.01 & 1.03 & 0.32\\
+\rowcolor{lightgray}  queryone & originalreplace & 1 & 1.03 & 1.01 & 0.98 & 1.05 & 1.03 & 1.04 & \textcolor{red}{1.16}\\
+\rowcolor{lightgray}  queryone & originalzlib & 1 & 1.03 & 1.04 & 0.99 & 1.01 & 1.01 & 1 & 0.43\\
+\rowcolor{lightgray}  visualise & draco & NA & NA & 7.58 & NA & 5.17 & NA & 0.45 & 9.11\\
+\rowcolor{lightgray}  visualise & dracocbor & 1.5 & 3.04 & \textcolor{red}{8.59} & 0.98 & \textcolor{red}{6.99} & 4.87 & 0.57 & \textcolor{red}{10.24}\\
+\rowcolor{lightgray}  visualise & dracocborreplace & 1.67 & 2.09 & NA & 0.88 & NA & 4.55 & NA & NA\\
+\rowcolor{lightgray}  visualise & dracocborreplacezlib & \textcolor{red}{1.74} & \textcolor{red}{3.39} & 8.58 & 0.9 & 6.86 & \textcolor{red}{5.62} & 0.58 & 10\\
+\rowcolor{lightgray}  visualise & dracocborzlib & 1.6 & 3.08 & 8.39 & 0.97 & 6.92 & 4.82 & 0.55 & 9.95\\
+visualise & dracoreplace & 1.65 & 3.13 & 8.54 & 0.86 & 6.93 & 5.59 & 0.57 & 9.94\\
+visualise & dracozlib & 1.56 & 2.98 & 7.53 & 0.82 & 5.13 & 4.65 & \textcolor{green}{0.43} & NA\\
+visualise & original & 1 & 1 & 1 & \textcolor{red}{1} & 1 & 1 & 1 & 1\\
+visualise & originalcbor & 0.93 & 0.9 & 0.79 & 0.92 & 0.85 & 0.88 & 0.99 & 0.75\\
+visualise & originalcborreplace & 1.05 & NA & NA & NA & NA & NA & NA & NA\\
+visualise & originalcborreplacezlib & 1.3 & 0.95 & 1.24 & 0.64 & 0.72 & 0.77 & 1.05 & NA\\
+visualise & originalcborzlib & 0.98 & 0.81 & 0.73 & 0.83 & 0.74 & 0.83 & 0.8 & \textcolor{green}{0.44}\\
+visualise & originalreplace & 1.14 & 0.99 & 1.55 & 0.71 & 0.94 & 0.83 & \textcolor{red}{1.27} & 1.21\\
+visualise & originalzlib & \textcolor{green}{0.91} & \textcolor{green}{0.7} & \textcolor{green}{0.52} & \textcolor{green}{0.59} & \textcolor{green}{0.34} & \textcolor{green}{0.64} & 0.57 & 0.44\\*
+\caption{Full benchmark results of compression on the fly, datasets without attributes}
+\label{tab:fullresultsotfnoattr}
+\end{longtable}
+
+
+\end{landscape}

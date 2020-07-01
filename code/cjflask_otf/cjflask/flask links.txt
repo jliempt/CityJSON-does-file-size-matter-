@@ -1,0 +1,26 @@
+Visualisation:
+http://127.0.0.1:5000/collections/delft/visualise/original
+
+Edit attributes first object:
+http://127.0.0.1:5000/collections/delft/0/edit/attributes/id/append/1/original
+
+Edit attributes all objects:
+http://127.0.0.1:5000/collections/delft/all/edit/attributes/id/append/1/original
+
+Query all objects:
+http://127.0.0.1:5000/collections/delft/query/bgt_status/%20/original
+
+Query first object:
+http://127.0.0.1:5000/collections/delft/index/0/original
+
+Edit geometry first object:
+http://127.0.0.1:5000/collections/delft/heighten/b0a8da4cc-2d2a-11e6-9a38-393caa90be70/original
+
+Edit geometry all objects:
+http://127.0.0.1:5000/collections/delft/heighten/all/original
+
+Spatial analysis:
+All:
+http://127.0.0.1:5000/collections/delft/buffer/all/original
+One:
+http://127.0.0.1:5000/collections/delft/buffer/0/original
