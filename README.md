@@ -29,7 +29,7 @@ Running the server + benchmark:
 Customising the benchmark:
 * If you want to only perform some of the operations, alter `flask_urls` and `tasks` in `flask_benchmark.py` accordingly.
 * The amount of test iterations can be altered by both changing `test_i` in `flask_benchmark.py` and `cjrest.py`.
-* If you are using other datasets, you need to add information on it in `code/benchmark_info.json` which is used for the query operations.
+* If you are using other datasets, you need to add information on it in `/code/benchmark_info.json` which is used for the query operations.
 
 Other remarks:
 * If you want to use Draco compression, place the build in the main folder of the repo.
