@@ -76,7 +76,7 @@ if __name__ == "__main__":
         columns.append("originalcborzlib," + dataset)
         out = comprout + "originalcborzlib/" + dataset + "_originalcborzlib.cbor" 
         
-        for i in range(3):   
+        for i in range(10):   
             start = ms_time()
             compress_originalcborzlib(file, out)
             end = ms_time()

@@ -273,7 +273,7 @@ if __name__ == "__main__":
         columns.append(dataset)
         out = comprout + "dracocborreplacezlib/" + dataset + "_dracocborreplacezlib.cbor" 
         
-        for i in range(3):   
+        for i in range(10):   
             start = ms_time()
             compress_dracocborreplacezlib(file, out, dataset)
             end = ms_time()

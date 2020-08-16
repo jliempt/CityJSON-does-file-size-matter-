@@ -188,7 +188,7 @@ if __name__ == "__main__":
         columns.append("dracozlib," + dataset)
         out = comprout + "dracozlib/" + dataset + "_dracozlib.zlib" 
         
-        for i in range(3):        
+        for i in range(10):        
             start = ms_time()
             compress_dracozlib(file, out, dataset)
             end = ms_time()

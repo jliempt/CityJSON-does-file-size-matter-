@@ -152,7 +152,7 @@ if __name__ == "__main__":
         columns.append(dataset)
         out = comprout + method + "/" + dataset + "_dracocborzlib.cbor" 
         
-        for i in range(3):   
+        for i in range(10):   
             start = ms_time()
             compress_dracocborzlib(file, out, dataset)
             end = ms_time()

@@ -76,7 +76,7 @@ if __name__ == "__main__":
         columns.append("originalzlib," + dataset)
         out = comprout + "originalzlib/" + dataset + "_originalzlib.zlib" 
         
-        for i in range(3):   
+        for i in range(10):   
             start = ms_time()
             compress_originalzlib(file, out)
             end = ms_time()

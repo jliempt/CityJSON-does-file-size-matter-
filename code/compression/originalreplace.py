@@ -231,7 +231,7 @@ if __name__ == "__main__":
         columns.append("originalreplace," + dataset)
         out = comprout + "originalreplace/" + dataset + "_originalreplace.json" 
         
-        for i in range(3):   
+        for i in range(10):   
             start = ms_time()
             compress_originalreplace(file, out)
             end = ms_time()

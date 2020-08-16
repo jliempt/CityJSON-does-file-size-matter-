@@ -20,7 +20,8 @@ def start_driver():
     return driver
     
 def benchmark(method, dataset, firstid, commonfield):
-    flask_address = "http://127.0.0.1:5000/collections"
+    base_url = "http://127.0.0.1:5000/"
+    flask_address = base_url + "collections"
 
     flask_urls = [f"{flask_address}/{dataset}/visualise/{method}",
           f"{flask_address}/{dataset}/0/edit/attributes/id/append/1/{method}",
@@ -68,14 +69,13 @@ def benchmark(method, dataset, firstid, commonfield):
             
     driver = start_driver()
     # create report
-    driver.get(f"http://127.0.0.1:5000/report")
+    driver.get(base_url + "report")
     time.sleep(1)
     driver.close()
 
 
 methods = ["draco", "originalzlib", "dracozlib", "originalcbor", "dracocbor", "originalcborzlib", "dracocborzlib", 
                   "originalreplace", "dracoreplace", "originalcborreplace", "dracocborreplace", "originalcborreplacezlib", "dracocborreplacezlib"]
-
 
 for method in methods:
     method = method

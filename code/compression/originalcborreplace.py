@@ -301,7 +301,7 @@ if __name__ == "__main__":
         columns.append("originalcborreplace," + dataset)
         out = comprout + "originalcborreplace/" + dataset + "_originalcborreplace.cbor" 
         
-        for i in range(3):   
+        for i in range(10):   
             start = ms_time()
             compress_originalcborreplace(file, out)
             end = ms_time()

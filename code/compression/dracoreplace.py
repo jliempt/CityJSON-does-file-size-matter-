@@ -240,7 +240,7 @@ if __name__ == "__main__":
         columns.append("dracoreplace," + dataset)
         out = comprout + "dracoreplace/" + dataset + "_dracoreplace.txt" 
         
-        for i in range(3):   
+        for i in range(10):   
             start = ms_time()
             compress_dracoreplace(file, out, dataset)
             end = ms_time()

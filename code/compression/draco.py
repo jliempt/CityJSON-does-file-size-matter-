@@ -179,7 +179,7 @@ if __name__ == "__main__":
         columns.append(dataset)
         out = comprout + "draco/" + dataset + "_draco.txt" 
         
-        for i in range(2):        
+        for i in range(10):        
             start = ms_time()
             compress_draco(file, out, dataset)
             end = ms_time()
