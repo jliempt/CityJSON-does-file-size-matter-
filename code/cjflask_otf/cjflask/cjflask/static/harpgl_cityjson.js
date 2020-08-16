@@ -52,12 +52,12 @@ async function handleFiles() {
 
    map.update();
 
-
+    
    if (task == "visualise"){
     // send time message to Flask app through SocketIO
 
     var d = new Date();
-    socket.emit('message', ["visualise", d.getTime(), "end"]);
+    socket.emit('message', [task, d.getTime(), "end"]);
     alert("visualise");}
    
 }

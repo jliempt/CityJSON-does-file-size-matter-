@@ -4,7 +4,7 @@ import shutil
 import json
 
 # folders
-with open("paths.json", "r") as paths_json:
+with open("../cjflask_otf/cjflask/paths.json", "r") as paths_json:
     paths = json.load(paths_json)
     temppath = paths["temppath"]
     cmpath = paths["cmpath"]

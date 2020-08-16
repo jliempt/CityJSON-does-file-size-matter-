@@ -1,5 +1,5 @@
 from cjflask import app
-from flask import send_file, render_template
+from flask import send_file, render_template, request
 from flask_socketio import SocketIO
 
 import json
@@ -11,10 +11,9 @@ import sys
 from cjio.cityjson import CityJSON
 from cjio import cityjson, subset
 from shapely import geometry
-from shapely.ops import triangulate
 
+# to be able to find compression code
 sys.path.append("../../compression")
-
 
 from originalcbor import compress_originalcbor
 from originalcborreplace import compress_originalcborreplace
@@ -50,6 +49,11 @@ ms_time = lambda: int(round(time.time() * 1000))
 # outputs report after test_i is met
 def create_report():
     global start, task_name
+    
+    try:
+        os.mkdir("../../benchmark/" + method_name)
+    except:
+        pass
     fn = "../../benchmark/" + method_name + "/" + method_name + "_" + dataset_name + ".json"
     # if the benchmark file already exists, update it
     if os.path.exists(fn):
@@ -88,6 +92,7 @@ def handle_message(message):
             if message[2] == "start":
                 if task_name not in start.keys():
                     start[task_name] = [message[1]]
+                    
                 else:
                     start[task_name].append(message[1])
             elif message[2] == "end":
@@ -105,7 +110,7 @@ def handle_message(message):
                 start[task_name][-1] += int(message[1])
                 print(len(start[task_name]), str(start[task_name][-1]) + "ms", task_name, method_name)
         
-    print(start)
+        print(start)
 
 # to simulate receiving message but within python
 def end_time(message):
@@ -117,6 +122,8 @@ def end_time(message):
             print(len(start[task_name]), str(start[task_name][-1]) + "ms", task_name, method_name)
 
 #=== start of Flask routes
+            
+# for writing benchmark report
 @app.route('/report/')
 def cmd_report():
     create_report()
@@ -126,6 +133,8 @@ def cmd_report():
 @app.route('/collections/<filename>/query/<field>/<value>/<method>')
 def cmd_query(filename, field, value, method):
     global task_name, method_name, dataset_name
+    
+    dl_base_url = "http://" + request.base_url.split("/")[2]
 
     if value == " ":
         task_name = "queryall"
@@ -168,12 +177,14 @@ def cmd_query(filename, field, value, method):
         
         compress("", outpath, cm2, method, filename)
         
-    return render_template("visualisation.html", method=method, task=task_name, filename=filename)
+    return render_template("visualisation.html", method=method, task=task_name, filename=filename, dl_base_url=dl_base_url)
     
         
 @app.route('/collections/<filename>/index/<index>/<method>')
 def cmd_by_index(filename, index, method):
     global task_name, method_name, dataset_name
+    
+    dl_base_url = "http://" + request.base_url.split("/")[2]
 
     task_name = "queryone"
     method_name = method
@@ -214,12 +225,15 @@ def cmd_by_index(filename, index, method):
     
     compress("", outpath, cm2, method, filename)
 
-    return render_template("visualisation.html", mimetype='text/xml', filename=filename, task=task_name, method=method)
+    return render_template("visualisation.html", mimetype='text/xml', filename=filename, task=task_name, method=method, dl_base_url=dl_base_url)
     
     
 @app.route('/collections/<filename>/<index>/edit/attributes/<field>/<operation>/<value>/<method>')
 def cmd_edit_attr(filename, index, field, operation, value, method):
     global task_name, method_name, dataset_name
+    
+    dl_base_url = "http://" + request.base_url.split("/")[2]
+    
     method_name = method
     dataset_name = filename
     
@@ -247,11 +261,6 @@ def cmd_edit_attr(filename, index, field, operation, value, method):
         # for all objects
         if index == "all":
             task_name = "editall"
-            # start measuring time
-            if task_name not in start.keys():
-                start[task_name] = [ms_time()]
-            else:
-                start[task_name].append(ms_time())
                 
             cm2 = copy.copy(cm)
             cm2.j["CityObjects"] = {}
@@ -262,11 +271,6 @@ def cmd_edit_attr(filename, index, field, operation, value, method):
         # for one object
         else:
             task_name = "editone"
-            # start measuring time
-            if task_name not in start.keys():
-                start[task_name] = [ms_time()]
-            else:
-                start[task_name].append(ms_time())
 
             co = list(cm.j["CityObjects"].keys())[int(index)]
             
@@ -292,13 +296,15 @@ def cmd_edit_attr(filename, index, field, operation, value, method):
     
     compress("", outpath, cm2, method, filename)
 
-    return render_template("visualisation.html", method=method, task=task_name, filename=filename)
+    return render_template("visualisation.html", method=method, task=task_name, filename=filename, dl_base_url=dl_base_url)
         
 
 
 @app.route('/collections/<filename>/buffer/<index>/<method>')
 def cmd_buffer(filename, index, method):
     global task_name, method_name, dataset_name
+    
+    dl_base_url = "http://" + request.base_url.split("/")[2]
 
     method_name = method
     dataset_name = filename
@@ -313,12 +319,6 @@ def cmd_buffer(filename, index, method):
     outpath = "../../../datasets/task/" + filename + "_" + method + "_" + task_name
 
         
-    # start measuring time
-    if task_name not in start.keys():
-        start[task_name] = [ms_time()]
-    else:
-        start[task_name].append(ms_time())
-    
     cmf = getcm(filename)
     cm = cityjson.reader(file=cmf, ignore_duplicate_keys=True)
     if cm == None:
@@ -330,7 +330,6 @@ def cmd_buffer(filename, index, method):
     
         # get CityObject
         cm2, co_id = co_by_index(cm, 0)
-        
         
         # start measuring time
         if task_name not in start.keys():
@@ -346,19 +345,17 @@ def cmd_buffer(filename, index, method):
         cm2.j["vertices"] = []
         vertices_i = -1
         
-        
         for geom in cm2.j["CityObjects"][co_id]["geometry"]:
             geom_2d = []
             geom_to_shapely(cj_vertices, geom["boundaries"], geom_2d)
             geom_2d.append(geom_2d[0])
             
             p = geometry.Polygon(geom_2d).convex_hull
-
             buf = p.buffer(1.0)
-            #buf_triangles = triangulate(buf)
+            
             out = []
             geom["boundaries"] = [[]]
-            #print(buf_triangles)
+
             #for triangle in buf_triangles:
             t = []
             t_i = []
@@ -407,14 +404,11 @@ def cmd_buffer(filename, index, method):
                 
                 polys.append(buf)
                 
-                #buf_triangles = triangulate(buf)
-                
                 out = []
                 geom["boundaries"] = [[]]
                 
                 #for triangle in buf_triangles:
                 t = []
-                t_i = []
                 for v_i, v in enumerate(list(buf.exterior.coords)):
                     if v_i != 3:
                         v = list(v)
@@ -425,7 +419,6 @@ def cmd_buffer(filename, index, method):
 
                 geom["boundaries"] = out               
                 geom["type"] = "MultiSurface"
-        #cm2.remove_duplicate_vertices()
             
             
     if method == "original":
@@ -447,12 +440,15 @@ def cmd_buffer(filename, index, method):
     cm2.compress()
     compress("", outpath, cm2, method, filename)
             
-    return render_template("visualisation.html", filename=filename, method=method, task=task_name)
+    return render_template("visualisation.html", filename=filename, method=method, task=task_name, dl_base_url=dl_base_url)
         
 
 @app.route('/collections/<filename>/visualise/<method>')
 def cmd_visualise(filename, method):
     global task_name, method_name, dataset_name
+    
+    dl_base_url = "http://" + request.base_url.split("/")[2]
+    
     # for test report name
     task_name = "visualise"
     method_name = method
@@ -467,13 +463,6 @@ def cmd_visualise(filename, method):
     else:
         start[task_name].append(ms_time())
     print(start)
-
-
-    # start measuring time
-    if task_name not in start.keys():
-        start[task_name] = [ms_time()]
-    else:
-        start[task_name].append(ms_time())
 
     cmf = getcm(filename)
     cm = cityjson.reader(file=cmf, ignore_duplicate_keys=True)
@@ -513,18 +502,21 @@ def cmd_visualise(filename, method):
     json.dump(compressiontimes ,f)
     f.close()
 
-    return render_template("visualisation.html", filename=filename, method=method, task=task_name, start=start)
+    return render_template("visualisation.html", filename=filename, method=method, task=task_name, start=start, dl_base_url=dl_base_url)
     
 @app.route('/collections/<filename>/decode/<method>')
 def cmd_decode(filename, method):
     global task_name, method_name, dataset_name
+    
+    dl_base_url = "http://" + request.base_url.split("/")[2]
+    
     # for test report name
     task_name = "decode"
     method_name = method
     dataset_name = filename
         
 
-    return render_template("visualisation.html", filename=filename, method=method, task=task_name, start=start)
+    return render_template("visualisation.html", filename=filename, method=method, task=task_name, start=start, dl_base_url=dl_base_url)
 
 # is used to download compressed CJ files because having Flask send a blob is troublesome
 @app.route('/download/<filename>/<method>/<task>')
@@ -537,17 +529,18 @@ def download(filename, method, task):
         p = '../../../datasets/drc/' + filename + ".drc"
         f = open(p, "rb")
         return send_file(f, attachment_filename=filename + ".drc")
-    # download citymodels
-
+    
+    # download citymodel
     cm = getcm(filename, method, task)
     
     return send_file(cm, attachment_filename=filename + "_" + method + ".txt")
-
     
 # heighten all vertices by 1 metre
 @app.route('/collections/<filename>/heighten/<co>/<method>')
 def cmd_heighten(filename, co, method):
     global task_name, method_name, dataset_name
+    
+    dl_base_url = "http://" + request.base_url.split("/")[2]
     
     # for test report name
     method_name = method
@@ -561,15 +554,7 @@ def cmd_heighten(filename, co, method):
         
     # path for storage of prepared data
     outpath = "../../../datasets/task/" + filename + "_" + method + "_" + task_name
-
-        
-    # start measuring time
-    if task_name not in start.keys():
-        start[task_name] = [ms_time()]
-    else:
-        start[task_name].append(ms_time())
     
-
 
     cmf = getcm(filename)
     cm = cityjson.reader(file=cmf, ignore_duplicate_keys=True)
@@ -623,7 +608,7 @@ def cmd_heighten(filename, co, method):
     
     compress("", outpath, cm2, method, filename)
         
-    return render_template("visualisation.html", filename=filename, method=method, task=task_name)
+    return render_template("visualisation.html", filename=filename, method=method, task=task_name, dl_base_url=dl_base_url)
     
     
 
@@ -693,12 +678,6 @@ def co_by_index(cm, index):
     cm2.j["CityObjects"][co] = cm.j["CityObjects"][co]
     #-- geometry
     subset.process_geometry(cm.j, cm2.j)
-    #-- templates
-    #subset.process_templates(cm.j, cm2.j)
-    #-- appearance
-    #if ("appearance" in cm.j):
-    #    cm2.j["appearance"] = {}
-    #    subset.process_appearance(cm.j, cm2.j)
     #-- metadata
     if ("metadata" in cm.j):
         cm2.j["metadata"] = cm.j["metadata"]

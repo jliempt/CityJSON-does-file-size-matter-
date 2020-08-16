@@ -63,6 +63,9 @@ cm = {{ cm|tojson }};
 {% if start is defined %}
 var start = {{ start|tojson }};
 {% endif %}
+{% if dl_base_url is defined %}
+var dl_base_url = {{ dl_base_url|tojson }};
+{% endif %}
 </script>
 
 
@@ -110,7 +113,7 @@ async function handleMethod(){
      if(method == "original" || method == "originalreplace" || method == "dracoreplace"){
         initViewer();
 
-        var requesturl = "http://127.0.0.1:5000/download/" + filename + "/" + method + "/" + task;
+        var requesturl = dl_base_url + "/download/" + filename + "/" + method + "/" + task;
         let response = await fetch(requesturl)
         
         .then((response) => {
@@ -127,7 +130,7 @@ async function handleMethod(){
             || method == "originalcborreplacezlib" || method == "dracocborreplacezlib" || method == "originalcborzlib" || method == "originalzlib" || method == "dracozlib" || method == "originalreplacezlib" || method == "originalreplacezlib"){
         
         initViewer();
-        var requesturl = "http://127.0.0.1:5000/download/" + filename + "/" + method + "/" + task;
+        var requesturl = dl_base_url + "/download/" + filename + "/" + method + "/" + task;
         var oReq = new XMLHttpRequest();
         oReq.open("GET", requesturl, true);
         if (method != "draco"){

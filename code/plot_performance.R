@@ -1,0 +1,149 @@
+# Load libraries
+library(readr)
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(knitr)
+library(kableExtra)
+library(reshape2)
+library(RColorBrewer)
+library(purrr)
+library(clipr)
+
+# Set working directory to code directory
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+
+# Read in from csv
+benchmark <- read_csv("./benchmark/benchmark.csv")
+
+
+# Convert to long format
+benchmark <- benchmark %>% 
+  pivot_longer(cols = delft:delft, names_to = "dataset", values_to = "timefactor")
+
+# Leave out all the 1's from the reference set
+benchmark <- benchmark %>% 
+  filter(method != "original") %>% 
+  filter(timefactor < 100)
+
+# Prepare for plotting
+benchmark2 <- benchmark %>% 
+  mutate(datasize = ifelse(dataset %in% c("delft", "denhaag", "montreal", "RotterdamLoD1Lod2"), "small datasets",
+                           ifelse(dataset %in% c("delft_noattr", "denhaag_noattr", "montreal_noattr", "RotterdamLoD1Lod2_noattr"), "small datasets without attr",
+                                  ifelse(dataset %in% c("newyork_noattr", "Zurich_noattr", "tudnl3d_noattr", "hdb_noattr"), "large datasets without attr", "large datasets"))))
+
+
+benchmark_boxplot <- function(data, operation) {
+  data %>% 
+    ggplot(aes(x = method, y = timefactor, fill = method)) +
+    geom_boxplot(show.legend=FALSE) +
+    #stat_summary(fun.y=mean, colour="darkred", geom="point", 
+    #             shape=18, size=3,show_guide = FALSE) + 
+    geom_hline(aes(yintercept = 1, colour = "Uncompressed CityJSON"), linetype = 2) +
+    scale_fill_discrete(name = "Compression type") +
+    scale_colour_manual(name = "Reference", values = 1) +
+    #facet_wrap(vars(datasize), scales = "fixed") +
+    facet_wrap(vars(datasize), scales = "free") +
+    coord_cartesian(ylim = c(0,2.5)) +
+    #coord_flip() +
+    xlab("Compression type") +
+    ylab("Time multiplier") +
+    ggtitle(paste('Time benchmarks for operation', operation, "with compression in advance")) +
+    theme(axis.text.x = element_text(angle = 67.5, hjust = 1))
+}
+
+
+
+# Bar graph
+benchmark2 %>% 
+  group_by(task) %>% 
+  nest() %>% 
+  mutate(plot = map(data, ~benchmark_boxplot(.x, task))) %>% 
+  pwalk(.l = list(.$task, .$plot), 
+        .f = ~ggsave(paste0("./benchmark/", ..1, ".pdf"), ..2, device = "pdf", height=8, width=7))
+
+
+
+
+# Tables with means for full results
+benchmark3 <- split(benchmark2, benchmark2$task)
+
+tables_string = ""
+
+
+for(i in benchmark3){
+  task = i[1,2]
+  print(task)
+
+  i %>%
+    group_by("datasize", "method") %>%
+    summarise(mean = median(timefactor))
+  i <- aggregate(timefactor~method+datasize, i, median)
+  
+  i_split = split(i, i$datasize)
+
+  for(j in 1:4){
+    out <- i_split[[j]]
+    out <- out[order(out$timefactor),]
+    datasize = out[2,2]
+    out$datasize = NULL
+    colnames(out)[1] <- paste("Compression type")
+    colnames(out)[2] <- paste("median")
+    row.names(out) <- NULL
+    i_split[[j]] <- out
+  }
+  
+  t1 <- kable(i_split[[1]], row.names = F, "latex")
+  t2 <- kable(i_split[[2]], row.names = F, "latex")
+  t3 <- kable(i_split[[3]], row.names = F, "latex")
+  t4 <- kable(i_split[[4]], row.names = F, "latex")
+  
+  tables_string = paste(tables_string, "
+  
+  \\begin{table}[!htb]
+    \\begin{minipage}{.5\\linewidth}
+      \\caption{",
+        paste("Median performance with", task, "on larger datasets, compression in advance}"),
+      "\\centering",
+        t1,
+        "\\end{minipage}%
+    \\begin{minipage}{.5\\linewidth}
+      \\centering
+        \\caption{",
+      paste("Median performance with", task, "on larger datasets without attributes, compression in advance}"),
+        t2,
+        "\\end{minipage} 
+\\end{table}"
+      
+      
+  , sep="\n"
+      )
+  
+  tables_string = paste(tables_string, "\\begin{table}[!htb]
+    \\begin{minipage}{.5\\linewidth}
+      \\caption{",
+              paste("Median performance with", task, "on smaller datasets, compression in advance}"),
+              "\\centering",
+              t3,
+              "\\end{minipage}%
+    \\begin{minipage}{.5\\linewidth}
+      \\centering
+        \\caption{",
+              paste("Median performance with", task, "on smaller datasets without attributes, compression in advance}"),
+              t4,
+              "\\end{minipage} 
+\\end{table}"
+              
+              
+  , sep="\n"
+  )
+  
+  #print("======================================")
+
+  #print(tables_string)
+  #write_clip(tables_string)
+
+}
+
+write_clip(tables_string)
+

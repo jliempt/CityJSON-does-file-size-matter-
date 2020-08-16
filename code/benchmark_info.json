@@ -1,0 +1,82 @@
+{
+	"delft": {
+	"firstid": "b0a8da4cc-2d2a-11e6-9a38-393caa90be70",
+	"commonfield": "bgt_status"
+	},
+	"Zurich": {
+	"firstid": "UUID_93fc5bae-4446-4336-9ff8-6679ebfdfde3",
+	"commonfield": "creationDate"
+	},
+	"denhaag": {
+	"firstid": "GUID_DBDABF53-7DD5-4C2F-BE7F-51F29A0CBA16_1",
+	"commonfield": "roofType"
+	},
+	"LOD11F0H3": {
+	"firstid": "1cb02c40-9d59-44e8-87b1-81b1fc9102e0",
+	"commonfield": "roofType"
+	},
+	"LOD20F0": {
+	"firstid": "1cb02c40-9d59-44e8-87b1-81b1fc9102e0",
+	"commonfield": "roofType"
+	},
+	"LOD30": {
+	"firstid": "1cb02c40-9d59-44e8-87b1-81b1fc9102e0",
+	"commonfield": "roofType"
+	},
+	"montreal": {
+	"firstid": "B-201391182746-80FE6BE00A9C",
+	"commonfield": "type"
+	},
+	"newyork": {
+	"firstid": "gml_7KKGXJDCBAXCTELB70OMHK04I376NBA6NGHC",
+	"commonfield": "SOURCE_ID"
+	},
+	"RotterdamLoD1Lod2": {
+	"firstid": "ID_0599100000643092",
+	"commonfield": "creationDate"
+	},
+	"tudnl3d": {
+	"firstid": "b00a922cc-e6d0-11e7-951f-610a7ca84980",
+	"commonfield": "bgt-functie"
+	},
+	"hdb": {
+	"firstid": "way172927954",
+	"commonfield": "osm_timestamp"
+	},
+	"kadastertiles": {
+	"firstid": "0200100000060198",
+	"commonfield": "3df_id"
+	},
+	"delft_noattr": {
+	"firstid": "b0a8da4cc-2d2a-11e6-9a38-393caa90be70",
+	"commonfield": "attributes"
+	},
+	"Zurich_noattr": {
+	"firstid": "UUID_93fc5bae-4446-4336-9ff8-6679ebfdfde3",
+	"commonfield": "attributes"
+	},
+	"denhaag_noattr": {
+	"firstid": "GUID_DBDABF53-7DD5-4C2F-BE7F-51F29A0CBA16_1",
+	"commonfield": "attributes"
+	},
+	"montreal_noattr": {
+	"firstid": "B-201391182746-80FE6BE00A9C",
+	"commonfield": "attributes"
+	},
+	"newyork_noattr": {
+	"firstid": "gml_7KKGXJDCBAXCTELB70OMHK04I376NBA6NGHC",
+	"commonfield": "attributes"
+	},
+	"RotterdamLoD1Lod2_noattr": {
+	"firstid": "ID_0599100000643092",
+	"commonfield": "attributes"
+	},
+	"tudnl3d_noattr": {
+	"firstid": "b00a922cc-e6d0-11e7-951f-610a7ca84980",
+	"commonfield": "attributes"
+	},
+	"hdb_noattr": {
+	"firstid": "way172927954",
+	"commonfield": "attributes"
+	}
+}

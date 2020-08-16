@@ -14,6 +14,7 @@ function processData(newData){
 // Visualisation of prepared CityJSON model
 if (method == "original"){
 
+  // Emit the end time with SocketIO. The data is now downloaded and ready to be used. But if the task is visualise, the end time will be emitted after visualisation.
   if (task != "visualise"){
     var d = new Date();
     socket.emit('message', [task, d.getTime(), "end"]);
@@ -232,7 +233,9 @@ else if (method == "draco" || method == "dracocbor" || method == "dracocborzlib"
   if (task != "visualise"){
     var d = new Date();
     socket.emit('message', [task, d.getTime(), "end"]);
+    alert(task);
   }
+
   loadDracoHarp(undefined, undefined, bbox);
   
 }
